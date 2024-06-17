@@ -1,4 +1,5 @@
 import Header from '../components/navigation/Header';
+import Footer from '../components/navigation/Footer';
 import ErrorPage from "../components/Error";
 
 const ErrorLayout = () => {
@@ -6,6 +7,7 @@ const ErrorLayout = () => {
     <>
       <Header /> 
       <ErrorPage />  
+      <Footer/>
     </>
   );
 };

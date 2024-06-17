@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
+import Footer from '../components/navigation/Footer';
 import SectionTemplate from "./aboutsections/SectionTemplate";
 import SectionOne from "./aboutsections/SectionOne";
 import AboutMeImage from "../assets/AboutMeImage1.webp";
@@ -170,6 +171,9 @@ const AboutMe = ({ setShowLogo, scrollRef }) => {
           text={AboutText3}
           socials={true}
         />
+        <div className="pb-1 md:hidden">
+          <Footer />
+        </div>
       </motion.section>
     </div>
   );

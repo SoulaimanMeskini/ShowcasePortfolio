@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeaderbubbleComponent from './HeaderBubble';
-import CustomLogo from '../CustomLogo';
-import useScrollVisibility from '../useScrollVisibility';
+import CustomLogo from '../svg/CustomLogo';
+import useScrollVisibility from '../hooks/useScrollVisibility';
 
 const Header = ({ showLogo, isLookbookPage }) => {
   const scrollDirection = useScrollVisibility();

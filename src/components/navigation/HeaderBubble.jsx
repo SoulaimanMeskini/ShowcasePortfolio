@@ -38,6 +38,7 @@ const Headerbubble = () => {
           e.stopPropagation();
           if (MenuOpen) {
             navigate(to);
+            SetMenuOpen(false); // Close menu after navigation
           }
         }}
         style={{ fontSize: '1.1rem' }} 
@@ -60,7 +61,7 @@ const Headerbubble = () => {
         onClick={() => SetMenuOpen(!MenuOpen)}
         whileHover={!MenuOpen ? { scale: 1.1 } : {}}
       >
-        {!MenuOpen && (
+        {!MenuOpen ? (
           <motion.div
             className="absolute right-[-20px] top-[-25px] cursor-pointer"
             initial={{ opacity: 1 }}
@@ -68,10 +69,26 @@ const Headerbubble = () => {
             whileHover={{ opacity: 0 }}
           >
             <svg width="100" height="100" viewBox="0 0 100 100">
-              <path id="textPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-              <text fontSize="15" fill="#1d1d1d">
-                <textPath href="#textPath" startOffset="50%" textAnchor="middle">
+              <path id="menuTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+              <text fontSize="14" fill="#1d1d1d">
+                <textPath href="#menuTextPath" startOffset="50%" textAnchor="middle">
                   MENU
+                </textPath>
+              </text>
+            </svg>
+          </motion.div>
+        ) : (
+          <motion.div
+            className="absolute right-[-20px] top-[-25px] cursor-pointer"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            whileHover={{ opacity: 0 }}
+          >
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <path id="closeTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+              <text fontSize="14" fill="#1d1d1d">
+                <textPath href="#closeTextPath" startOffset="50%" textAnchor="middle">
+                  CLOSE
                 </textPath>
               </text>
             </svg>
