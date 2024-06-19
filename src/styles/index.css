@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Julius+Sans+One&family=Khula:wght@400&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Color Variables */
 :root {
@@ -43,6 +43,8 @@ body, html {
   --sb-thumb-color: var(--scrollbar-thumb-color);
   --sb-thumb-hover-color: var(--scrollbar-thumb-hover-color);
   --sb-size: var(--scrollbar-size);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -67,17 +69,6 @@ body, html {
   background: var(--sb-thumb-hover-color);
 }
 
-@supports not selector(::-webkit-scrollbar) {
-  .scroll-container {
-    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-    scrollbar-width: var(--sb-size);
-  }
-
-  .scroll-container::-webkit-scrollbar-thumb:hover {
-    scrollbar-color: var(--sb-thumb-hover-color) var(--sb-track-color);
-  }
-}
-
 /* Global scrollbar styles */
 ::-webkit-scrollbar {
   width: var(--scrollbar-size);
@@ -98,9 +89,15 @@ body, html {
   background: var(--scrollbar-thumb-hover-color);
 }
 
-@supports not selector(::-webkit-scrollbar) {
-  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
-  scrollbar-width: var(--scrollbar-size);
+@supports not (scrollbar-color: var(--sb-thumb-color) var(--sb-track-color)) {
+  .scroll-container {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-width: var(--sb-size);
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    scrollbar-color: var(--sb-thumb-hover-color) var(--sb-track-color);
+  }
 }
 
 /* Font styles */
@@ -152,3 +149,41 @@ video::media-controls {
   display: none !important;
 }
 
+.scroll-container {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .no-scrollbar::-webkit-scrollbar {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer {
+    display: block !important;
+  }
+}
+
+.responsive-gif {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .responsive-gif {
+    width: 400px;
+    height: 400px;
+  }
+}

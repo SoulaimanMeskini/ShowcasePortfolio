@@ -24,25 +24,23 @@ const LoadingScreen = () => {
           draggable="false"
           src={gifSrc}
           alt="Loading..."
-          style={{ width: '600px', height: '600px' }}
+          className="responsive-gif"
         />
       </div>
-      <div className="flex items-center text-center">
+      <div className="absolute bottom-6 flex items-center space-x-2">
         <p className="text-lg font-semibold">Loading</p>
-        <div className="flex space-x-2 ml-2">
-          <motion.span
-            className="inline-block w-2 h-2 bg-gray-900 rounded-full p-1"
-            animate={{ opacity: [0, 1, 0], transition: { duration: 1.2, repeat: Infinity } }}
-          ></motion.span>
-          <motion.span
-            className="inline-block w-2 h-2 bg-gray-900 rounded-full p-1"
-            animate={{ opacity: [0, 1, 0], transition: { duration: 1.2, repeat: Infinity, delay: 0.4 } }}
-          ></motion.span>
-          <motion.span
-            className="inline-block w-2 h-2 bg-gray-900 rounded-full p-1"
-            animate={{ opacity: [0, 1, 0], transition: { duration: 1.2, repeat: Infinity, delay: 0.8 } }}
-          ></motion.span>
-        </div>
+        <motion.span
+          className="inline-block w-2 h-2 bg-gray-900 rounded-full"
+          animate={{ opacity: [0, 1, 0], transition: { duration: 1.2, repeat: Infinity } }}
+        ></motion.span>
+        <motion.span
+          className="inline-block w-2 h-2 bg-gray-900 rounded-full"
+          animate={{ opacity: [0, 1, 0], transition: { duration: 1.2, repeat: Infinity, delay: 0.4 } }}
+        ></motion.span>
+        <motion.span
+          className="inline-block w-2 h-2 bg-gray-900 rounded-full"
+          animate={{ opacity: [0, 1, 0], transition: { duration: 1.2, repeat: Infinity, delay: 0.8 } }}
+        ></motion.span>
       </div>
     </motion.div>
   );

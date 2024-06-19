@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useLayoutEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import ProjectTemplate from './projectsections/ProjectTemplate';
 import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectText1, ProjectText2, ProjectText3 } from '../text/text';
 import Footer from '../components/navigation/Footer';
@@ -33,7 +33,38 @@ const SouraikoImages = [
   { src: SouraikoImage4, alt: 'Souraiko Image 4' }
 ];
 
-const Projects = () => {
+const Projects = ({ scrollRef }) => {
+  const controlsArray = [useAnimation(), useAnimation(), useAnimation()];
+
+  useLayoutEffect(() => {
+    const observerOptions = {
+      root: scrollRef.current,
+      threshold: 0.1
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        const { target, isIntersecting } = entry;
+        const index = parseInt(target.dataset.index, 10);
+        const control = controlsArray[index];
+        if (isIntersecting) {
+          control.start({ opacity: 1 });
+        } else {
+          control.start({ opacity: 0 });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = document.querySelectorAll('.project-section');
+    sections.forEach((section, index) => {
+      section.dataset.index = index;
+      observer.observe(section);
+    });
+
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, [controlsArray, scrollRef]);
+
   const projectData = [
     { images: KinderImages, title: ProjectTitle1, text: ProjectText1 },
     { images: RubyImages, title: ProjectTitle2, text: ProjectText2 },
@@ -41,27 +72,31 @@ const Projects = () => {
   ];
 
   return (
-    <div className="relative w-screen flex flex-col">
-      <div className="flex-grow">
-        {projectData.map((data, index) => (
-          <motion.div
-            key={index}
-            className="project-section h-screen w-full flex justify-center items-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7 }}
-          >
-            <ProjectTemplate
-              images={data.images}
-              title={data.title}
-              text={data.text}
-              imgStyles={{}}
-              videoStyles={{ height: "auto" }}
-            />
-          </motion.div>
-        ))}
+    <div
+      className="relative h-screen w-screen md:snap-y md:snap-mandatory overflow-y-scroll scroll-container"
+      ref={scrollRef}
+    >
+      {projectData.map((data, index) => (
+        <motion.section
+          key={index}
+          id={`section${index + 1}`}
+          className="project-section h-full w-full md:snap-center flex justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={controlsArray[index]}
+          transition={{ duration: 0.7 }}
+        >
+          <ProjectTemplate
+            images={data.images}
+            title={data.title}
+            text={data.text}
+            imgStyles={{}}
+            videoStyles={{ height: 'auto' }}
+          />
+        </motion.section>
+      ))}
+      <div className="footer w-full md:hidden">
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };
