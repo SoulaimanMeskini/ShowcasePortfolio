@@ -1,5 +1,3 @@
-// src/components/navigation/ScrollToTopButton.jsx
-
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -7,26 +5,31 @@ const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
-    if (window.scrollY > window.innerHeight / 2) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
+    setIsVisible(window.scrollY > window.innerHeight / 2); 
   };
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
+    const debouncedToggleVisibility = debounce(toggleVisibility, 30); 
+    window.addEventListener('scroll', debouncedToggleVisibility);
     return () => {
-      window.removeEventListener('scroll', toggleVisibility);
+      window.removeEventListener('scroll', debouncedToggleVisibility);
     };
   }, []);
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  };
 
   return (
     <AnimatePresence>
@@ -34,11 +37,12 @@ const ScrollToTopButton = () => {
         <>
           <motion.button
             onClick={scrollToTop}
-            className="fixed bottom-10 right-6 w-12 h-12 bg-[#1d1d1d] text-[#f5f5f5] rounded-full transition-transform duration-300 hover:scale-110 hover:bg-[#6f02c6] flex items-center justify-center z-[500]"
+            className="fixed bottom-10 right-2 w-12 h-12 bg-[#1d1d1d] text-[#f5f5f5] rounded-full transition-transform duration-300 hover:scale-110 hover:bg-[#6f02c6] flex items-center justify-center z-[1000]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            aria-label="Scroll to top"
           >
             <svg
               width={24}
@@ -54,8 +58,8 @@ const ScrollToTopButton = () => {
             </svg>
           </motion.button>
           <motion.div
-            className="fixed z-[400]"
-            style={{ bottom: '3.5rem', right: '0rem' }} // Use inline styles to adjust the position
+            className="fixed z-[999] flex justify-center"
+            style={{ bottom: '3.5rem', right: '1rem', transform: 'translateX(32%)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -65,7 +69,7 @@ const ScrollToTopButton = () => {
               <path id="topTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0" />
               <text fontSize="14" fill="#1d1d1d">
                 <textPath href="#topTextPath" startOffset="50%" textAnchor="middle">
-                 TO TOP
+                  TO TOP
                 </textPath>
               </text>
             </svg>

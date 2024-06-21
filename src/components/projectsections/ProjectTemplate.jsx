@@ -14,7 +14,7 @@ const ProjectTemplate = ({ images, title, text: TextComponent, imgStyles = {}, v
   }, []);
 
   return (
-    <section className="flex flex-col items-center w-full h-full p-4 md:w-4/5 md:p-8 md:flex-row ">
+    <section className="flex flex-col items-center w-full p-4 md:w-4/5 md:p-8 md:flex-row">
       <div className="order-1 md:order-2 flex justify-center md:items-start w-full md:w-1/2 px-3 md:px-5 space-y-2 md:space-y-4 mt-4 md:mt-0">
         <div className="max-w-lg">
           <h1 className="text-lg md:text-2xl mt-2 md:mt-4">{title}</h1>
@@ -30,37 +30,26 @@ const ProjectTemplate = ({ images, title, text: TextComponent, imgStyles = {}, v
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {images.map((img, index) => {
-            if (img.src.endsWith(".mp4")) {
-              return (
-                <div key={index} className="flex items-center justify-center md:p-4 p-2">
-                  <video
-                    className="rounded-2xl object-cover w-full h-full md:w-auto md:h-auto"
-                    style={{ ...videoStyles }}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    draggable="false" 
-                  >
-                    <source src={img.src} type="video/mp4" />
-                  </video>
-                </div>
-              );
-            } else {
-              return (
-                <div key={index} className="flex items-center justify-center md:p-4 p-2">
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="rounded-2xl object-cover w-full h-full md:w-auto md:h-auto"
-                    style={{ ...imgStyles }}
-                    draggable="false" 
-                  />
-                </div>
-              );
-            }
-          })}
+          {images.map((img, index) => (
+            <div key={index} className="flex items-center justify-center md:p-4 p-2">
+              {img.src.endsWith(".mp4") ? (
+                <video
+                  className="rounded-2xl object-cover w-full md:w-4/5"
+                  style={videoStyles}
+                >
+                  <source src={img.src} type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="rounded-2xl object-cover w-full md:w-4/5"
+                  style={imgStyles}
+                  draggable="false"
+                />
+              )}
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

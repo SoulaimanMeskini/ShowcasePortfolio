@@ -3,9 +3,9 @@ import { motion, useAnimation } from "framer-motion";
 import Footer from '../components/navigation/Footer';
 import SectionTemplate from "./aboutsections/SectionTemplate";
 import SectionOne from "./aboutsections/SectionOne";
-import AboutMeImage from "../assets/AboutMeImage1.webp";
-import AboutMeImage2 from "../assets/AboutMeImage2.webp";
-import AboutMeImage3 from "../assets/AboutMeImage3.webp";
+import AboutMeImage from "../assets/about/AboutMeImage1.webp";
+import AboutMeImage2 from "../assets/about/AboutMeImage2.webp";
+import AboutMeImage3 from "../assets/about/AboutMeImage3.webp";
 import {
   AboutTitle1,
   AboutTitle2,
@@ -51,15 +51,16 @@ const AboutMe = ({ setShowLogo, scrollRef }) => {
       }
     };
 
+    const debouncedHandleScroll = debounce(handleScroll, 100);
     const scrollContainer = scrollRef.current;
     if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", handleScroll);
+      scrollContainer.addEventListener("scroll", debouncedHandleScroll);
       handleScroll(); // Initialize state based on initial scroll position
     }
 
     return () => {
       if (scrollContainer) {
-        scrollContainer.removeEventListener("scroll", handleScroll);
+        scrollContainer.removeEventListener("scroll", debouncedHandleScroll);
       }
     };
   }, [setShowLogo, scrollRef]);
@@ -98,10 +99,7 @@ const AboutMe = ({ setShowLogo, scrollRef }) => {
       });
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
     const sections = document.querySelectorAll("section");
     sections.forEach((section) => observer.observe(section));
 
@@ -109,6 +107,14 @@ const AboutMe = ({ setShowLogo, scrollRef }) => {
       sections.forEach((section) => observer.unobserve(section));
     };
   }, [controls1, controls2, controls3, controls4, scrollRef]);
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  };
 
   return (
     <div

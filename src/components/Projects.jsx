@@ -5,16 +5,16 @@ import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectText1, ProjectText2
 import Footer from '../components/navigation/Footer';
 
 // Image imports
-import KinderImage1 from '../assets/project/kinder1.png';
-import KinderImage2 from '../assets/project/kinder2.png';
-import RubyImage1 from '../assets/project/Ruby1.png';
-import RubyImage2 from '../assets/project/Ruby2.png';
-import RubyImage3 from '../assets/project/Ruby3.png';
+import KinderImage1 from '../assets/project/kinder1.webp';
+import KinderImage2 from '../assets/project/kinder2.webp';
+import RubyImage1 from '../assets/project/Ruby1.webp';
+import RubyImage2 from '../assets/project/Ruby2.webp';
+import RubyImage3 from '../assets/project/Ruby3.webp';
 import RubyImage4 from '../assets/project/Ruby4.mp4';
-import SouraikoImage1 from '../assets/project/Souraiko1.png';
-import SouraikoImage2 from '../assets/project/Souraiko2.jpg';
-import SouraikoImage3 from '../assets/project/Souraiko3.png';
-import SouraikoImage4 from '../assets/project/Souraiko4.png';
+import SouraikoImage1 from '../assets/project/Souraiko1.webp';
+import SouraikoImage2 from '../assets/project/Souraiko2.webp';
+import SouraikoImage3 from '../assets/project/Souraiko3.webp';
+import SouraikoImage4 from '../assets/project/Souraiko4.webp';
 
 const KinderImages = [
   { src: KinderImage1, alt: 'Kinder Image 1' },
@@ -89,8 +89,8 @@ const Projects = ({ scrollRef }) => {
             images={data.images}
             title={data.title}
             text={data.text}
-            imgStyles={{}}
-            videoStyles={{ height: 'auto' }}
+            imgStyles={{ width: '80%' }} // Added 80% width for mobile responsiveness
+            videoStyles={{ width: '80%', height: 'auto' }} // Added 80% width for mobile responsiveness
           />
         </motion.section>
       ))}

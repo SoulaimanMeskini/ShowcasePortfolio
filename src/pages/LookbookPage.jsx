@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Header from '../components/navigation/Header';
 import Footer from '../components/navigation/Footer';
 import Lookbook from '../components/Lookbook';
-import ScrollToTopButton from '../components/navigation/ScrollToTopButton'; // Import the ScrollToTopButton
+import ScrollToTopButton from '../components/navigation/ScrollToTopButton';
 
 const LookbookPage = () => {
   return (

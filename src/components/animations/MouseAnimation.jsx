@@ -16,7 +16,6 @@ const MouseAnimation = () => {
             top: '7px',
             left: '50%',
             marginLeft: '-3px',
-            animation: 'sdb9 2s infinite',
           }}
         ></div>
       </div>
@@ -36,6 +35,10 @@ const MouseAnimation = () => {
           100% {
             opacity: 0;
           }
+        }
+
+        .animate-sdb9 {
+          animation: sdb9 2s infinite;
         }
       `}</style>
     </div>

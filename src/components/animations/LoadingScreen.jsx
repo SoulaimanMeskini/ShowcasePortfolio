@@ -25,6 +25,8 @@ const LoadingScreen = () => {
           src={gifSrc}
           alt="Loading..."
           className="responsive-gif"
+          width="100" // Set explicit width
+          height="100" // Set explicit height
         />
       </div>
       <div className="absolute bottom-6 flex items-center space-x-2">

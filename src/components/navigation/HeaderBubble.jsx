@@ -8,92 +8,75 @@ const navItems = [
   { to: "/lookbook", label: "Lookbook" }
 ];
 
+const containerVariants = {
+  closed: { width: 55, height: 55, borderRadius: 50, transition: { duration: 0.1, ease: "easeInOut" } },
+  open: { width: 300, height: 55, borderRadius: 50, transition: { duration: 0.1, ease: "easeInOut" } }
+};
+
+const navVariants = {
+  hidden: { opacity: 0, transition: { duration: 0.1, ease: "easeInOut" } },
+  visible: { opacity: 1, transition: { duration: 0.1, ease: "easeInOut", delay: 0.1 } }
+};
+
+const NavItem = ({ to, label, onClick }) => (
+  <motion.li
+    className="mx-2 cursor-pointer"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.1, delay: 0.1 }}
+  >
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `nav-link text-[#dadada] relative ${isActive ? "is-active" : ""}`
+      }
+      onClick={onClick}
+      style={{ fontSize: '1.1rem' }} 
+    >
+      {label}
+    </NavLink>
+  </motion.li>
+);
+
 const Headerbubble = () => {
-  const [MenuOpen, SetMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const containerVariants = {
-    closed: { width: 55, height: 55, borderRadius: 50, transition: { duration: 0.1, ease: "easeInOut" } },
-    open: { width: 300, height: 55, borderRadius: 50, transition: { duration: 0.1, ease: "easeInOut" } }
+  const handleNavClick = (to) => {
+    if (menuOpen) {
+      navigate(to);
+      setMenuOpen(false); // Close menu after navigation
+    }
   };
-
-  const navVariants = {
-    hidden: { opacity: 0, transition: { duration: 0.1, ease: "easeInOut" } },
-    visible: { opacity: 1, transition: { duration: 0.1, ease: "easeInOut", delay: 0.1 } }
-  };
-
-  const NavItem = ({ to, label }) => (
-    <motion.li
-      className="mx-2 cursor-pointer"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.1, delay: 0.1 }}
-    >
-      <NavLink
-        to={to}
-        className={({ isActive }) =>
-          `nav-link text-[#dadada] relative ${isActive ? "is-active" : ""}`
-        }
-        onClick={(e) => {
-          e.stopPropagation();
-          if (MenuOpen) {
-            navigate(to);
-            SetMenuOpen(false); // Close menu after navigation
-          }
-        }}
-        style={{ fontSize: '1.1rem' }} 
-      >
-        {label}
-      </NavLink>
-    </motion.li>
-  );
 
   return (
     <div className="relative flex items-center select-none">
       <motion.div
         variants={containerVariants}
         initial="closed"
-        animate={MenuOpen ? "open" : "closed"}
+        animate={menuOpen ? "open" : "closed"}
         className={`h-[50px] w-[50px] flex justify-center items-center bg-[#1d1d1d] border border-[#1d1d1d] ${
-          MenuOpen ? 'cursor-default' : 'cursor-pointer'
+          menuOpen ? 'cursor-default' : 'cursor-pointer'
         } transition-all duration-200 ease-in-out transform relative`}
         id="MenuChanger"
-        onClick={() => SetMenuOpen(!MenuOpen)}
-        whileHover={!MenuOpen ? { scale: 1.1 } : {}}
+        onClick={() => setMenuOpen(!menuOpen)}
+        whileHover={!menuOpen ? { scale: 1.1 } : {}}
       >
-        {!MenuOpen ? (
-          <motion.div
-            className="absolute right-[-20px] top-[-25px] cursor-pointer"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            whileHover={{ opacity: 0 }}
-          >
-            <svg width="100" height="100" viewBox="0 0 100 100">
-              <path id="menuTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-              <text fontSize="14" fill="#1d1d1d">
-                <textPath href="#menuTextPath" startOffset="50%" textAnchor="middle">
-                  MENU
-                </textPath>
-              </text>
-            </svg>
-          </motion.div>
-        ) : (
-          <motion.div
-            className="absolute right-[-20px] top-[-25px] cursor-pointer"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            whileHover={{ opacity: 0 }}
-          >
-            <svg width="100" height="100" viewBox="0 0 100 100">
-              <path id="closeTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-              <text fontSize="14" fill="#1d1d1d">
-                <textPath href="#closeTextPath" startOffset="50%" textAnchor="middle">
-                  CLOSE
-                </textPath>
-              </text>
-            </svg>
-          </motion.div>
-        )}
+        <motion.div
+          className="absolute right-[-20px] top-[-25px] cursor-pointer"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          whileHover={{ opacity: 0 }}
+        >
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path id="menuTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+            <text fontSize="14" fill="#1d1d1d">
+              <textPath href="#menuTextPath" startOffset="50%" textAnchor="middle">
+                {menuOpen ? "CLOSE" : "MENU"}
+              </textPath>
+            </text>
+          </svg>
+        </motion.div>
         <style>{`
           .nav-link:before {
             content: '';
@@ -112,7 +95,7 @@ const Headerbubble = () => {
           }
         `}</style>
         <AnimatePresence>
-          {MenuOpen && (
+          {menuOpen && (
             <motion.nav
               key="nav"
               variants={navVariants}
@@ -122,7 +105,7 @@ const Headerbubble = () => {
             >
               <ul className="m-0 p-0 flex flex-row items-center justify-center cursor-default rounded whitespace-nowrap list-none">
                 {navItems.map((item, index) => (
-                  <NavItem key={index} {...item} />
+                  <NavItem key={index} {...item} onClick={() => handleNavClick(item.to)} />
                 ))}
               </ul>
             </motion.nav>

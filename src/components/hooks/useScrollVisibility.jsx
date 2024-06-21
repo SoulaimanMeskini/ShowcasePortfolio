@@ -6,20 +6,17 @@ const useScrollVisibility = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScrollTop > lastScrollTop) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
         setScrollDirection('down');
-      } else {
+      } else if (scrollTop < lastScrollTop) {
         setScrollDirection('up');
       }
-      setLastScrollTop(currentScrollTop);
+      setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
     };
 
     window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
   return scrollDirection;

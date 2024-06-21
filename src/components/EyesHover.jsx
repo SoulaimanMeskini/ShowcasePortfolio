@@ -13,7 +13,7 @@ const EyesHover = () => {
     if (!isHovered) {
       const interval = setInterval(() => {
         setIsVisible((prev) => !prev);
-      }, 4000); 
+      }, 4000);
       
       return () => clearInterval(interval);
     }
@@ -34,14 +34,14 @@ const EyesHover = () => {
       <Link to="/draw">
         <FollowingEyes />
       </Link>
-      <motion.div  
+      <motion.div
         className="absolute text-lg font-bold text-[#1d1d1d] -right-10 -top-10 transform rotate-45"
         variants={hoverVariants}
         initial="hidden"
         animate={isHovered ? "visible" : (isVisible ? "visible" : "hidden")}
         style={{ zIndex: 20 }}
       >
-        <ClickMe /> 
+        <ClickMe />
       </motion.div>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const AboutTitle1 = "Nice to meet you";
@@ -7,7 +6,7 @@ export const AboutTitle3 = "Snapshots of Life";
 
 export const AboutText1 = () => (
   <p>
-    Welcome to my website. My name is <span><mark >Soulaiman Meskini</mark></span> , and I call the beautiful city of Eindhoven in the Netherlands my home. Take a look around like the googly eyes at my array of projects. I'm passionate about being creative, stretching from sketching and video editing to the intricate details of <mark>UX/UI design</mark>. My toolbox includes a wide variety of Adobe programs like Photoshop, InDesign, Illustrator, and After Effects, not to mention other programs like Canva, Figma, and Procreate.
+    Welcome to my website. My name is <span><mark >Soulaiman Meskini</mark></span> , and I call the beautiful city of Eindhoven in the Netherlands my home. Take a look around jut like the googly eyes at my array of projects. I'm passionate about being creative, stretching from sketching and video editing to the intricate details of <mark>UX/UI design</mark>. My toolbox includes a wide variety of Adobe programs like Photoshop, InDesign, Illustrator, and After Effects, not to mention other programs like Canva, Figma, and Procreate.
   </p>
 );
 
@@ -50,6 +49,6 @@ export const ProjectText2 = () => (
 
 export const ProjectText3 = () => (
   <p>
-    Souraiko is a <mark>passion project</mark> between my friend and me, where every piece of clothing, sticker, accessory, and figure is handcrafted with care and creativity. Our designs are unique, reflecting our love for streetwear and the planet. We strive to produce our clothing in the most <mark>environmentally friendly</mark> manner possible. Our latest venture involves creating 3D characters with AR codes and spreading them across cities. By scanning the QR code, you can claim the artwork on our site, earning discounts or becoming part of our community. It's like a geo hunt, blending fashion with interactive tech!
+    Souraiko is a <mark>passion project</mark> between my friend and me, where every piece of clothing, sticker, accessory, and figure is selfmade with care and creativity. Our designs are unique, reflecting our love for streetwear and the planet. We strive to produce our clothing in the most <mark>environmentally friendly</mark> manner possible. Our latest venture involves creating 3D characters with AR codes and spreading them across cities. By scanning the QR code, you can claim the artwork on our site, earning discounts or becoming part of our community. It's like a geo hunt, blending fashion with interactive tech!
   </p>
 );

@@ -1,10 +1,9 @@
-import React from 'react';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Footer = ({ width = '380px', height = '55px' }) => {
   return (
     <footer
-      className="bg-[#1d1d1d] text-[#f5f5f5] px-6 py-1 mb-5 rounded-full flex justify-between items-center mx-auto "
+      className="bg-[#1d1d1d] text-[#f5f5f5] px-6 py-1 mb-5 rounded-full flex justify-between items-center mx-auto"
       style={{ width, height }}
     >
       <div className="text-sm">
@@ -17,6 +16,7 @@ const Footer = ({ width = '380px', height = '55px' }) => {
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#f5f5f5] text-2xl transition-colors duration-300 hover:text-[#6f02c6]"
+          aria-label="GitHub"
         >
           <FaGithub />
         </a>
@@ -26,6 +26,7 @@ const Footer = ({ width = '380px', height = '55px' }) => {
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#f5f5f5] text-2xl transition-colors duration-300 hover:text-[#6f02c6]"
+          aria-label="Instagram"
         >
           <FaInstagram />
         </a>
@@ -35,6 +36,7 @@ const Footer = ({ width = '380px', height = '55px' }) => {
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#f5f5f5] text-2xl transition-colors duration-300 hover:text-[#6f02c6]"
+          aria-label="LinkedIn"
         >
           <FaLinkedin />
         </a>

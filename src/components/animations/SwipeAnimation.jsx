@@ -1,10 +1,10 @@
-import handImage from '../../assets/Hand.png'; 
+import handImage from '../../assets/Hand.webp';
 
 const SwipeAnimation = () => {
   return (
     <div className="flex justify-center items-center text-black relative w-12 h-12">
-      <div className="path bg-[#6f02c6] opacity-45 rounded-full absolute"></div>
-      <div className="hand-icon bg-center bg-no-repeat bg-cover w-9 h-9"></div>
+      <div className="path bg-[#6f02c6] opacity-45 rounded-full absolute animate-swipe-dot"></div>
+      <div className="hand-icon bg-center bg-no-repeat bg-cover w-9 h-9 animate-swipe-hand"></div>
       <style>{`
         .hand-icon {
           background-image: url(${handImage});
@@ -50,11 +50,11 @@ const SwipeAnimation = () => {
             height: 18px;
           }
         }
-        .hand-icon {
+        .animate-swipe-hand {
           animation: swipe-hand 2s infinite ease-in;
           animation-direction: reverse;
         }
-        .path {
+        .animate-swipe-dot {
           animation: swipe-dot 2s infinite ease-in-out;
         }
       `}</style>

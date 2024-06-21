@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import AboutMe from "../components/AboutMe";
 import Header from '../components/navigation/Header';
 import NavButton from "../components/navigation/NavButton";
@@ -24,7 +24,7 @@ const AboutMePage = () => {
       const firstSection = document.getElementById('section1');
       const secondSection = document.getElementById('section2');
       const thirdSection = document.getElementById('section3');
-      const fourthSection = document.getElementById('section4'); // Get the fourth section
+      const fourthSection = document.getElementById('section4');
       if (firstSection && secondSection && thirdSection && fourthSection) {
         const firstBounding = firstSection.getBoundingClientRect();
         const secondBounding = secondSection.getBoundingClientRect();
@@ -51,7 +51,7 @@ const AboutMePage = () => {
     const scrollContainer = scrollRef.current;
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initialize state based on initial scroll position
+      handleScroll(); 
     }
 
     return () => {
@@ -66,10 +66,10 @@ const AboutMePage = () => {
       <Header showLogo={showLogo} />
       <AboutMe setShowLogo={setShowLogo} scrollRef={scrollRef} />
       <div className="fixed right-4 top-1/2 transform -translate-y-1/2 space-y-2 hidden md:flex flex-col pr-4">
-        <NavButton onClick={() => scrollToSection('section1')} isSelected={selectedSection === 'section1'} />
-        <NavButton onClick={() => scrollToSection('section2')} isSelected={selectedSection === 'section2'} />
-        <NavButton onClick={() => scrollToSection('section3')} isSelected={selectedSection === 'section3'} />
-        <NavButton onClick={() => scrollToSection('section4')} isSelected={selectedSection === 'section4'} />  {/* New button for the fourth section */}
+        <NavButton onClick={() => scrollToSection('section1')} isSelected={selectedSection === 'section1'} label="Go to section 1" />
+        <NavButton onClick={() => scrollToSection('section2')} isSelected={selectedSection === 'section2'} label="Go to section 2" />
+        <NavButton onClick={() => scrollToSection('section3')} isSelected={selectedSection === 'section3'} label="Go to section 3" />
+        <NavButton onClick={() => scrollToSection('section4')} isSelected={selectedSection === 'section4'} label="Go to section 4" />
       </div>
     </div>
   );
