@@ -20,7 +20,7 @@ const SectionOne = () => {
         transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
         <div className="hidden md:flex justify-center items-center w-full md:w-1/2 h-full relative">
-          <Draw enableDrawing={false} canvasScale={0.7} eyesScale={0.6} />
+          <Draw enableDrawing={false} canvasScale={1} eyesScale={0.4} />
         </div>
         <div className="flex flex-col justify-center items-center space-y-4 w-full md:w-1/2 max-w-md md:max-w-lg">
           <div className="svg-container mx-auto w-45 h-45">

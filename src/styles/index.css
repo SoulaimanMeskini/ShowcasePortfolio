@@ -100,6 +100,16 @@ body, html {
   }
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .no-scrollbar::-webkit-scrollbar {
+    display: block;
+  }
+}
+
 /* Font styles */
 h1 {
   font-family: 'Julius Sans One', sans-serif;
@@ -135,7 +145,6 @@ mark {
   box-decoration-break: clone;
 }
 
-/* styles.css */
 video::-webkit-media-controls {
   display: none !important;
 }
@@ -144,24 +153,6 @@ video::-moz-media-controls {
 }
 video::-ms-media-controls {
   display: none !important;
-}
-video::media-controls {
-  display: none !important;
-}
-
-.scroll-container {
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .no-scrollbar::-webkit-scrollbar {
-    display: block;
-  }
 }
 
 @media (max-width: 768px) {

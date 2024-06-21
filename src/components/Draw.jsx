@@ -7,6 +7,7 @@ const Draw = ({ enableDrawing = true, canvasScale = 1, eyesScale = 1 }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [context, setContext] = useState(null);
   const [showText, setShowText] = useState(true);
+  const [showKeyboardWarning, setShowKeyboardWarning] = useState(false);
 
   const saveDrawing = useCallback(() => {
     const canvas = canvasRef.current;
@@ -77,27 +78,49 @@ const Draw = ({ enableDrawing = true, canvasScale = 1, eyesScale = 1 }) => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (enableDrawing && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+      setShowKeyboardWarning(true);
+      setTimeout(() => {
+        setShowKeyboardWarning(false);
+      }, 2000);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="relative w-full h-screen flex items-center justify-center">
-      <div className="absolute top-0 left-0 w-full h-full" style={{ transform: `scale(${canvasScale})`, transformOrigin: 'top left' }}>
-        <div className="relative w-full h-full">
-          <canvas
-            ref={canvasRef}
-            className={`absolute top-0 left-0 w-full h-full ${!enableDrawing ? 'pointer-events-none' : ''}`}
-            onMouseDown={startDrawing}
-            onMouseUp={stopDrawing}
-            onMouseMove={draw}
-            onMouseOut={stopDrawing}
-            style={{ zIndex: 10 }}
-          />
-          <FollowingEyes className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none`} style={{ transform: `scale(${eyesScale})`, zIndex: 20 }} />
-        </div>
-      </div>
+      <canvas
+        ref={canvasRef}
+        className={`absolute top-0 left-0 w-full h-full ${!enableDrawing ? 'pointer-events-none' : ''}`}
+        onMouseDown={startDrawing}
+        onMouseUp={stopDrawing}
+        onMouseMove={draw}
+        onMouseOut={stopDrawing}
+        style={{ transform: `scale(${canvasScale})`, transformOrigin: 'top left', zIndex: 10 }}
+      />
+      <FollowingEyes
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        style={{ transform: `scale(${eyesScale})`, zIndex: 20 }}
+      />
       {showText && enableDrawing && (
         <div className="absolute bottom-10 w-full text-center z-30">
           <h1 className="text-2xl text-[#1d1d1d] bg-[#f5f5f5] p-2 rounded">
             You can draw on the screen
           </h1>
+        </div>
+      )}
+      {showKeyboardWarning && (
+        <div className="absolute  w-full text-center z-40">
+          <div className="inline-block bg-red-600 text-white text-lg p-3 rounded-lg">
+            Please use a mouse to draw on the screen
+          </div>
         </div>
       )}
       {enableDrawing && (

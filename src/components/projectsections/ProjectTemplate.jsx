@@ -31,12 +31,13 @@ const ProjectTemplate = ({ images, title, text: TextComponent, imgStyles = {}, v
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           {images.map((img, index) => (
-            <div key={index} className="flex items-center justify-center md:p-4 p-2">
+            <div key={index+"projectimg"} className="flex items-center justify-center md:p-4 p-2">
               {img.src.endsWith(".mp4") ? (
                 <video
                   className="rounded-2xl object-cover w-full md:w-4/5"
                   style={videoStyles}
                 >
+                  <track kind='captions'/>
                   <source src={img.src} type="video/mp4" />
                 </video>
               ) : (

@@ -105,7 +105,7 @@ const Headerbubble = () => {
             >
               <ul className="m-0 p-0 flex flex-row items-center justify-center cursor-default rounded whitespace-nowrap list-none">
                 {navItems.map((item, index) => (
-                  <NavItem key={index} {...item} onClick={() => handleNavClick(item.to)} />
+                  <NavItem key={index+"navitem"} {...item} onClick={() => handleNavClick(item.to)} />
                 ))}
               </ul>
             </motion.nav>

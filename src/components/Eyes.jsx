@@ -18,7 +18,8 @@ const FollowingEyes = () => {
     };
   }, [handleMouseMove]);
 
-  const Eye = ({ mousePosition }) => (
+  const Eye = ({ mousePosition }) => {
+    return (
     <div className="relative flex justify-center items-center mx-16">
       <div className="relative w-[250px] h-[130px] flex justify-center items-center rounded-full overflow-hidden border-8 border-[#f5f5f5] max-sm:w-[130px] max-sm:h-[70px]">
         <img
@@ -47,7 +48,7 @@ const FollowingEyes = () => {
         />
       </div>
     </div>
-  );
+  )};
 
   return (
     <div className="flex justify-center items-center h-full">

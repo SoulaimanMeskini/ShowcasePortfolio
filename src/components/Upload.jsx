@@ -9,28 +9,12 @@ const Upload = () => {
   const uploadImage = useCallback(() => {
     const storageRef = ref(storage, "images");
 
-    // 'file' comes from the Blob or File API
       console.log(imageReft.current?.target);
       console.log(imageReft.current?.target);
     uploadBytesResumable(storage, imageReft.current?.target, { }).then((snapshot) => {
       console.log("Uploaded a blob or file!");
     });
 
-    // storageRef.put(imageReft.current).on(
-    //   "state_changed",
-    //   (snap) => {
-    //     let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-    //   },
-    //   (err) => {
-    //     setError(err);
-    //   },
-    //   async () => {
-    //     const url = await storageRef.getDownloadURL();
-    //     const createdAt = timestamp();
-    //     await collectionRef.add({ url, createdAt });
-    //     setUrl(url);
-    //   }
-    // );
   }, [fileobj, imageReft]);
 
   return (

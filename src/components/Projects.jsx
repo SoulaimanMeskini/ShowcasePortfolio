@@ -78,7 +78,7 @@ const Projects = ({ scrollRef }) => {
     >
       {projectData.map((data, index) => (
         <motion.section
-          key={index}
+          key={index+"projcet"}
           id={`section${index + 1}`}
           className="project-section h-full w-full md:snap-center flex justify-center items-center"
           initial={{ opacity: 0 }}

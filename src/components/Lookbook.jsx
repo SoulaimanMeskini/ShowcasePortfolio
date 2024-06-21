@@ -7,8 +7,7 @@ for (let i = 1; i <= 50; i++) {
   images.push(`/src/assets/lookbook/${i}.gif`);
 }
 
-console.log(images); // Log the paths to ensure they are correct
-
+console.log(images); 
 const Lookbook = () => {
   return (
     <div className="flex justify-center items-center min-h-screen py-20 px-16">
@@ -18,15 +17,11 @@ const Lookbook = () => {
         >
           <Masonry gutter="16px">
             {images.map((image, i) => (
-              <div key={i} className="flex justify-center items-center ">
+              <div key={i+"img"} className="flex justify-center items-center ">
                 <img 
                   src={image}
                   className="block rounded-lg object-cover"
-                  alt={`Gallery image ${i}`}
-                  onError={(e) => { 
-                    console.error(`Image failed to load: ${image}`); 
-                    e.target.style.display = 'none'; 
-                  }} 
+                  alt={`Gallery illustration ${i}`}
                   style={{ width: '100%', height: 'auto' }}
                 />
               </div>
