@@ -1,4 +1,4 @@
-import EyesComponent from './Eyes'; 
+import EyesComponent from './FollowingEyes'; 
 
 const ErrorPage = () => {
   return (
