@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-import FollowingEyes from './Eyes';
-import ClickMe from './svg/ClickMe'; 
+import ClickMe from './ClickMe'; 
 
-const EyesHover = () => {
+const EyesHover = ({ enableDrawing, enableLink }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -31,20 +30,38 @@ const EyesHover = () => {
       className="relative cursor-pointer"
       style={{ zIndex: 10 }}
     >
-      <Link to="/draw">
-        <FollowingEyes />
-      </Link>
-      <motion.div
-        className="absolute text-lg font-bold text-[#1d1d1d] -right-10 -top-10 transform rotate-45"
-        variants={hoverVariants}
-        initial="hidden"
-        animate={isHovered ? "visible" : (isVisible ? "visible" : "hidden")}
-        style={{ zIndex: 20 }}
-      >
-        <ClickMe />
-      </motion.div>
+      {enableLink && (
+        <Link to="/draw">
+          <motion.div
+            className="absolute text-lg font-bold text-[#1d1d1d] -right-10 -top-10 transform rotate-45"
+            variants={hoverVariants}
+            initial="hidden"
+            animate={isHovered ? "visible" : (isVisible ? "visible" : "hidden")}
+            style={{ zIndex: 20 }}
+          >
+            <ClickMe />
+          </motion.div>
+        </Link>
+      )}
     </div>
   );
 };
 
 export default EyesHover;
+
+const ClickMe = () => {
+  return (
+    <svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="curvedPath" fill="transparent" d="M20,80 Q100,10 180,80" />
+      </defs>
+      <text fill="#1d1d1d" fontSize="18" fontWeight="bold">
+        <textPath href="#curvedPath" startOffset="50%" textAnchor="middle">
+          Click me
+        </textPath>
+      </text>
+    </svg>
+  );
+};
+
+export default ClickMe;

@@ -1,9 +1,8 @@
-import React from 'react';
 import Header from '../components/navigation/Header';
 import Draw from '../components/Draw';
 import { motion } from 'framer-motion';
 
-const UploadPage = () => {
+const DrawPage = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -13,9 +12,9 @@ const UploadPage = () => {
       className="w-full"
     >
       <Header showLogo={true} animateLogo={false} />
-      <Draw/>
+      <Draw />
     </motion.div>
   );
 };
 
-export default UploadPage;
+export default DrawPage;

@@ -89,8 +89,8 @@ const Projects = ({ scrollRef }) => {
             images={data.images}
             title={data.title}
             text={data.text}
-            imgStyles={{ width: '80%' }} 
-            videoStyles={{ width: '80%', height: 'auto' }} 
+            imgStyles={{ width: '90%' }} 
+            videoStyles={{ width: '90%', height: 'auto' }} 
           />
         </motion.section>
       ))}

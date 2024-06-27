@@ -55,7 +55,7 @@ const Headerbubble = () => {
         variants={containerVariants}
         initial="closed"
         animate={menuOpen ? "open" : "closed"}
-        className={`h-[50px] w-[50px] flex justify-center items-center bg-[#1d1d1d] border border-[#1d1d1d] ${
+        className={`h-[55px] w-[55px] flex justify-center items-center bg-[#1d1d1d] border border-[#1d1d1d] ${
           menuOpen ? 'cursor-default' : 'cursor-pointer'
         } transition-all duration-200 ease-in-out transform relative`}
         id="MenuChanger"
@@ -105,7 +105,7 @@ const Headerbubble = () => {
             >
               <ul className="m-0 p-0 flex flex-row items-center justify-center cursor-default rounded whitespace-nowrap list-none">
                 {navItems.map((item, index) => (
-                  <NavItem key={index+"navitem"} {...item} onClick={() => handleNavClick(item.to)} />
+                  <NavItem key={index + "navitem"} {...item} onClick={() => handleNavClick(item.to)} />
                 ))}
               </ul>
             </motion.nav>

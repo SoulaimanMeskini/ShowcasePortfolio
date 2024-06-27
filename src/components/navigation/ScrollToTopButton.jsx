@@ -37,7 +37,7 @@ const ScrollToTopButton = () => {
         <>
           <motion.button
             onClick={scrollToTop}
-            className="fixed bottom-10 right-2 w-12 h-12 bg-[#1d1d1d] text-[#f5f5f5] rounded-full transition-transform duration-300 hover:scale-110 hover:bg-[#6f02c6] flex items-center justify-center z-[1000]"
+            className="fixed bottom-10 right-8 w-12 h-12 bg-[#1d1d1d] text-[#f5f5f5] rounded-full transition-transform duration-300 hover:scale-110 hover:bg-[#6f02c6] flex items-center justify-center z-[1000]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -59,7 +59,7 @@ const ScrollToTopButton = () => {
           </motion.button>
           <motion.div
             className="fixed z-[999] flex justify-center"
-            style={{ bottom: '3.5rem', right: '1rem', transform: 'translateX(32%)' }}
+            style={{ bottom: '3.5rem', right: '2.5rem', transform: 'translateX(32%)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
