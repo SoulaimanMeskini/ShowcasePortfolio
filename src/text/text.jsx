@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 
+
+///// About Page
+
 export const AboutTitle1 = "Nice to meet you";
 export const AboutTitle2 = "Check out my work";
 export const AboutTitle3 = "Snapshots of Life";
@@ -26,14 +29,17 @@ export const AboutImgText1 = "Fontys Tilburg - Netherlands";
 export const AboutImgText2 = "Grand Café Van Gogh - Romania";
 export const AboutImgText3 = "Obelisk - Vatican City";
 
+//// Project Page 
 
 export const ProjectTitle1 = "De Kindertelefoon";
 export const ProjectTitle2 = "Ruby Mus";
 export const ProjectTitle3 = "Souraiko";
+export const ProjectTitle4 = "The Legend of Zelda";
 
 export const ProjectImgText1 = "Fontys project";
 export const ProjectImgText2 = "Fontys project";
 export const ProjectImgText3 = "Own project";
+export const ProjectImgText4 = "Own project";
 
 export const ProjectText1 = () => (
   <p>
@@ -52,3 +58,23 @@ export const ProjectText3 = () => (
     Souraiko is a <mark>passion project</mark> between my friend and me, where every piece of clothing, sticker, accessory, and figure is selfmade with care and creativity. Our designs are unique, reflecting our love for streetwear and the planet. We strive to produce our clothing in the most <mark>environmentally friendly</mark> manner possible. Our latest venture involves creating 3D characters with AR codes and spreading them across cities. By scanning the QR code, you can claim the artwork on our site, earning discounts or becoming part of our community. It's like a geo hunt, blending fashion with interactive tech!
   </p>
 );
+
+export const ProjectText4 = () => (
+  <p>
+    In this project, I've worked on recreating the iconic intro scene of the original <mark>Legend of Zelda (NES)</mark>, but with a custom twist where you can enter your own name, and it will display "The Legend of [Your Name]." I meticulously recreated all the assets and coded the entire experience using <mark>HTML, CSS, and JavaScript</mark>. Click on <a 
+      href="https://legend-of-zelda-4s1124iwo-soulaimanmeskinis-projects.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ 
+        color: 'inherit', 
+        textDecoration: 'underline', 
+        transition: 'color 0.3s ease' 
+      }}
+      onMouseOver={(e) => e.currentTarget.style.color = '#6f02c6'}
+      onMouseOut={(e) => e.currentTarget.style.color = 'inherit'}
+    >
+      Legend of Zelda (NES)
+    </a> to view the project and experience the custom intro for yourself.
+  </p>
+);
+

@@ -4,9 +4,9 @@ const ClickMe = () => {
       <defs>
         <path id="curvedPath" fill="transparent" d="M20,80 Q100,10 180,80" />
       </defs>
-      <text fill="#1d1d1d" fontSize="18" fontWeight="bold">
+      <text fill="#1d1d1d" fontSize="16" fontWeight="bold" style={{ fontFamily: 'Khula, sans-serif' }}>
         <textPath href="#curvedPath" startOffset="50%" textAnchor="middle">
-          Click me
+          CLICK ME
         </textPath>
       </text>
     </svg>

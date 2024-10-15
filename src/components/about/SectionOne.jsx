@@ -47,7 +47,7 @@ const SectionOne = () => {
         transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
         <div className="hidden md:flex justify-center w-full h-full items-center md:w-1/2 relative">
-          <Draw enableDrawing={false} enableLink={true} clickMePosition={{ top: '42%', left: '70%' }} />
+          <Draw enableDrawing={false} enableLink={true} clickMePosition={{ top: '42%', left: '65%' }} />
         </div>
         <div className="flex flex-col justify-center items-center space-y-4 w-full md:w-1/2 max-w-md md:max-w-lg">
           <div className="svg-container mx-auto w-45 h-45">

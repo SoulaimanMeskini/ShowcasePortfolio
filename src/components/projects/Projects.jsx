@@ -1,20 +1,23 @@
 import React, { useLayoutEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import ProjectTemplate from './projectsections/ProjectTemplate';
-import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectText1, ProjectText2, ProjectText3 } from '../text/text';
-import Footer from '../components/navigation/Footer';
+import ProjectTemplate from './ProjectTemplate';
+import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectTitle4, ProjectText1, ProjectText2, ProjectText3, ProjectText4 } from '../../text/text';
+import Footer from '../navigation/Footer';
 
 // Image imports
-import KinderImage1 from '../assets/project/kinder1.webp';
-import KinderImage2 from '../assets/project/kinder2.webp';
-import RubyImage1 from '../assets/project/Ruby1.webp';
-import RubyImage2 from '../assets/project/Ruby2.webp';
-import RubyImage3 from '../assets/project/Ruby3.webp';
-import RubyImage4 from '../assets/project/Ruby4.mp4';
-import SouraikoImage1 from '../assets/project/Souraiko1.webp';
-import SouraikoImage2 from '../assets/project/Souraiko2.webp';
-import SouraikoImage3 from '../assets/project/Souraiko3.webp';
-import SouraikoImage4 from '../assets/project/Souraiko4.webp';
+import KinderImage1 from '../../assets/project/kinder1.webp';
+import KinderImage2 from '../../assets/project/kinder2.webp';
+import RubyImage1 from '../../assets/project/Ruby1.webp';
+import RubyImage2 from '../../assets/project/Ruby2.webp';
+import RubyImage3 from '../../assets/project/Ruby3.webp';
+import RubyImage4 from '../../assets/project/Ruby4.mp4';
+import SouraikoImage1 from '../../assets/project/Souraiko1.webp';
+import SouraikoImage2 from '../../assets/project/Souraiko2.webp';
+import SouraikoImage3 from '../../assets/project/Souraiko3.webp';
+import SouraikoImage4 from '../../assets/project/Souraiko4.webp';
+import ZeldaImage1 from '../../assets/project/zelda1.webp';
+import ZeldaImage2 from '../../assets/project/zelda2.webp';
+
 
 const KinderImages = [
   { src: KinderImage1, alt: 'Kinder Image 1' },
@@ -32,9 +35,13 @@ const SouraikoImages = [
   { src: SouraikoImage3, alt: 'Souraiko Image 3' },
   { src: SouraikoImage4, alt: 'Souraiko Image 4' }
 ];
+const ZeldaImages = [
+  { src: ZeldaImage1, alt: 'Zelda Image 1' },
+  { src: ZeldaImage2, alt: 'Zelda Image 2' }
+];
 
 const Projects = ({ scrollRef }) => {
-  const controlsArray = [useAnimation(), useAnimation(), useAnimation()];
+  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation()];
 
   useLayoutEffect(() => {
     const observerOptions = {
@@ -68,7 +75,8 @@ const Projects = ({ scrollRef }) => {
   const projectData = [
     { images: KinderImages, title: ProjectTitle1, text: ProjectText1 },
     { images: RubyImages, title: ProjectTitle2, text: ProjectText2 },
-    { images: SouraikoImages, title: ProjectTitle3, text: ProjectText3 }
+    { images: SouraikoImages, title: ProjectTitle3, text: ProjectText3 },
+    { images: ZeldaImages, title: ProjectTitle4, text: ProjectText4 }
   ];
 
   return (
@@ -78,7 +86,7 @@ const Projects = ({ scrollRef }) => {
     >
       {projectData.map((data, index) => (
         <motion.section
-          key={index+"projcet"}
+          key={index + "project"}
           id={`section${index + 1}`}
           className="project-section h-full w-full md:snap-center flex justify-center items-center"
           initial={{ opacity: 0 }}
@@ -89,8 +97,8 @@ const Projects = ({ scrollRef }) => {
             images={data.images}
             title={data.title}
             text={data.text}
-            imgStyles={{ width: '90%' }} 
-            videoStyles={{ width: '90%', height: 'auto' }} 
+            imgStyles={{ width: '90%' }}
+            videoStyles={{ width: '90%', height: 'auto' }}
           />
         </motion.section>
       ))}

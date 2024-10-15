@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import Footer from '../components/navigation/Footer';
-import SectionTemplate from "./aboutsections/SectionTemplate";
-import SectionOne from "./aboutsections/SectionOne";
+import Footer from '../navigation/Footer';
+import SectionTemplate from "./SectionTemplate";
+import SectionOne from "./SectionOne";
 import {
   AboutTitle1,
   AboutTitle2,
@@ -13,10 +13,10 @@ import {
   AboutTitle3,
   AboutText3,
   AboutImgText3,
-} from "../text/text";
-import AboutMeImage1 from "../assets/about/AboutMeImage1.webp";
-import AboutMeImage2 from "../assets/about/AboutMeImage2.webp";
-import AboutMeImage3 from "../assets/about/AboutMeImage3.webp";
+} from "../../text/text";
+import AboutMeImage1 from "../../assets/about/AboutMeImage1.webp";
+import AboutMeImage2 from "../../assets/about/AboutMeImage2.webp";
+import AboutMeImage3 from "../../assets/about/AboutMeImage3.webp";
 
 const aboutSectionsData = [
   {

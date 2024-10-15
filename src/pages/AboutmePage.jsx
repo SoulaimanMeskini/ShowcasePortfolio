@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import AboutMe from "../components/AboutMe";
+import AboutMe from "../components/about/AboutMe";
 import Header from '../components/navigation/Header';
 import NavButton from "../components/navigation/NavButton";
 
@@ -58,7 +58,7 @@ const AboutMePage = () => {
     <div className="relative w-full h-screen">
       <Header showLogo={showLogo} />
       <AboutMe setShowLogo={setShowLogo} scrollRef={scrollRef} />
-      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 space-y-2 flex flex-col pr-4 z-50">
+      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 space-y-2 flex flex-col pr-4 z-50 md:flex hidden">
         <NavButton onClick={() => scrollToSection('section1')} isSelected={selectedSection === 'section1'} label="Go to section 1" />
         <NavButton onClick={() => scrollToSection('section2')} isSelected={selectedSection === 'section2'} label="Go to section 2" />
         <NavButton onClick={() => scrollToSection('section3')} isSelected={selectedSection === 'section3'} label="Go to section 3" />

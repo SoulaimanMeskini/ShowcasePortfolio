@@ -1,7 +1,7 @@
 import Header from '../components/navigation/Header';
-import Upload from '../components/Upload';
+import Upload from '../components/upload/Upload';
 import { motion } from 'framer-motion';
-import PasswordProtect from '../components/PasswordProtect'; 
+import PasswordProtect from '../components/upload/PasswordProtect'; 
 
 const UploadPage = () => {
   return (

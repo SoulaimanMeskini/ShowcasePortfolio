@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { db, storage } from '../firebase/config';
+import { db, storage } from '../../firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
