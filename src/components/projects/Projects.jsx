@@ -73,10 +73,10 @@ const Projects = ({ scrollRef }) => {
   }, [controlsArray, scrollRef]);
 
   const projectData = [
+    { images: ZeldaImages, title: ProjectTitle4, text: ProjectText4 },
+    { images: SouraikoImages, title: ProjectTitle3, text: ProjectText3 },
     { images: KinderImages, title: ProjectTitle1, text: ProjectText1 },
     { images: RubyImages, title: ProjectTitle2, text: ProjectText2 },
-    { images: SouraikoImages, title: ProjectTitle3, text: ProjectText3 },
-    { images: ZeldaImages, title: ProjectTitle4, text: ProjectText4 }
   ];
 
   return (
