@@ -126,6 +126,12 @@ p {
   color: var(--primary-text-color);
 }
 
+@media (max-width: 768px) {
+  p {
+    line-height: 1.6;
+  }
+}
+
 .highlight {
   color: #6f02c6;
 }
