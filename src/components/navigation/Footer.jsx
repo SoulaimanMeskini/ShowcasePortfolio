@@ -4,7 +4,11 @@ const Footer = ({ width = '380px', height = '55px' }) => {
   return (
     <footer
       className="bg-[#1d1d1d] text-[#f5f5f5] px-6 py-1 mb-5 rounded-full flex justify-between items-center mx-auto"
-      style={{ width, height }}
+      style={{
+        width: '100%', // make width 100% to allow responsive adjustments
+        maxWidth: width, // set the maxWidth for large screens
+        height,
+      }}
     >
       <div className="text-sm">
         &copy; {new Date().getFullYear()} Soulaiman Meskini
