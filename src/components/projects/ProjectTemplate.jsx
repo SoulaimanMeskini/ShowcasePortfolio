@@ -31,7 +31,7 @@ const ProjectTemplate = ({ images, title, text: TextComponent, imgStyles = {}, v
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           {images.map((img, index) => (
-            <>
+            <React.Fragment key={index}>
               {img.src.endsWith(".mp4") ? (
                 <div key={index + "projectimg"} className="flex items-center justify-center md:p-4 p-2 col-span-2">
                   <div className="flex justify-center">
@@ -56,7 +56,7 @@ const ProjectTemplate = ({ images, title, text: TextComponent, imgStyles = {}, v
                 </div>
               )
               }
-            </>
+            </React.Fragment>
           ))}
         </motion.div>
       </div>
