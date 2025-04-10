@@ -26,7 +26,7 @@ const KinderImages = [
 const RubyImages = [
   { src: RubyImage1, alt: 'Ruby Image 1' },
   { src: RubyImage2, alt: 'Ruby Image 2' },
-  { src: RubyImage3, alt: 'Ruby Image 3' },
+  // { src: RubyImage3, alt: 'Ruby Image 3' },
   { src: RubyImage4, alt: 'Ruby Video 4' }
 ];
 const SouraikoImages = [

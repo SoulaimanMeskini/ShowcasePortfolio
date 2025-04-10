@@ -31,25 +31,32 @@ const ProjectTemplate = ({ images, title, text: TextComponent, imgStyles = {}, v
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           {images.map((img, index) => (
-            <div key={index+"projectimg"} className="flex items-center justify-center md:p-4 p-2">
+            <>
               {img.src.endsWith(".mp4") ? (
-                <video
-                  className="rounded-2xl object-cover w-full md:w-4/5"
-                  style={videoStyles}
-                >
-                  <track kind='captions'/>
-                  <source src={img.src} type="video/mp4" />
-                </video>
+                <div key={index + "projectimg"} className="flex items-center justify-center md:p-4 p-2 col-span-2">
+                  <div className="flex justify-center">
+                    <video
+                      className="rounded-2xl object-cover w-full md:w-4/5"
+                      style={videoStyles}
+                    >
+                      <track kind="captions" />
+                      <source src={img.src} type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
               ) : (
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="rounded-2xl object-cover w-full md:w-4/5"
-                  style={imgStyles}
-                  draggable="false"
-                />
-              )}
-            </div>
+                <div key={index + "projectimg"} className="flex items-center justify-center md:p-4 p-2">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="rounded-2xl object-cover w-full md:w-4/5"
+                    style={imgStyles}
+                    draggable="false"
+                  />
+                </div>
+              )
+              }
+            </>
           ))}
         </motion.div>
       </div>
