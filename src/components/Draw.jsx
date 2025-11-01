@@ -50,10 +50,9 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (canvas) {
-      // Save current canvas state before resizing
       const savedDrawing = localStorage.getItem('savedDrawing');
       
-      // Store old dimensions
+      // Store old dimensions before resizing
       const oldWidth = canvas.width;
       const oldHeight = canvas.height;
       
@@ -67,23 +66,20 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
       const renderCtx = canvas.getContext('2d');
       setContext(renderCtx);
       
-      // If there's a saved drawing, scale it to new dimensions
+      // Load saved drawing
       if (savedDrawing) {
         const img = new Image();
         img.src = savedDrawing;
         img.onload = () => {
-          // Clear canvas
-          renderCtx.clearRect(0, 0, newWidth, newHeight);
-          
-          // Calculate scale factors
-          const scaleX = newWidth / oldWidth;
-          const scaleY = newHeight / oldHeight;
-          
-          // Draw the image scaled to new canvas size
-          renderCtx.drawImage(img, 0, 0, oldWidth, oldHeight, 0, 0, newWidth, newHeight);
-          
-          // Save the resized drawing
-          localStorage.setItem('savedDrawing', canvas.toDataURL());
+          // If this is initial load (no old dimensions), draw at original size
+          if (oldWidth === 0 || oldHeight === 0) {
+            renderCtx.drawImage(img, 0, 0);
+          } else {
+            // Scale from old dimensions to new dimensions
+            renderCtx.drawImage(img, 0, 0, oldWidth, oldHeight, 0, 0, newWidth, newHeight);
+            // Save the resized version
+            localStorage.setItem('savedDrawing', canvas.toDataURL());
+          }
         };
       }
     }
@@ -106,14 +102,29 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
       resizeObserver.observe(canvasRef.current);
     }
 
-    resizeCanvas();
+    // Initialize canvas
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext('2d');
+      setContext(ctx);
+      
+      // Set drawing properties
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = 2;
+      
+      // Load saved drawing
+      loadDrawing(ctx);
+    }
+
     window.addEventListener('resize', resizeCanvas);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       resizeObserver.disconnect();
     };
-  }, [resizeCanvas]);
+  }, [resizeCanvas, loadDrawing]);
 
   useEffect(() => {
     if (!isHovered) {
@@ -222,7 +233,7 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
   };
 
   return (
-    <div className="relative w-full h-full md:h-screen flex flex-col items-center justify-center"
+    <div className="relative w-full h-full flex flex-col items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
