@@ -1,13 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import LogoBlack from '../svg/Logo';
 import MouseAnimation from '../animations/MouseAnimation';
 import SwipeAnimation from '../animations/SwipeAnimation';
 import Draw from '../Draw';
+import AnimatedEyes from '../AnimatedEyes';
 
 const SectionOne = () => {
   const ref = useRef(null);
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1], [0, 100]);
   const [animationStart, setAnimationStart] = useState(false); // State to control animation start
 
@@ -49,7 +50,7 @@ const SectionOne = () => {
         <div className="hidden md:flex justify-center w-full h-full items-center md:w-1/2 relative">
           <Draw enableDrawing={false} enableLink={true} clickMePosition={{ top: '42%', left: '65%' }} />
         </div>
-        <div className="flex flex-col justify-center items-center space-y-4 w-full md:w-1/2 max-w-md md:max-w-lg">
+        <div className="flex flex-col justify-center items-center space-y-4 w-full md:w-1/2 max-w-md md:max-w-lg relative z-30">
           <div className="svg-container mx-auto w-45 h-45">
             <LogoBlack />
           </div>
@@ -66,6 +67,9 @@ const SectionOne = () => {
             ))}
           </motion.h1>
           <hr className="w-full max-w-[14rem] border-t-1 border-black rounded" />
+          <div className="block md:hidden my-4 w-full flex justify-center">
+            <AnimatedEyes />
+          </div>
           <h2 className="text-xl text-center">Portfolio Website</h2>
           <p className="text-md text-center md:block hidden">Scroll down to see and read more</p>
           <p className="text-md text-center md:hidden">Swipe to see and read more</p>

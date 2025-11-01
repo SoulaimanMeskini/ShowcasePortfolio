@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaFileAlt } from 'react-icons/fa';
 import CV from '../../assets/soulaimancv.pdf';
 import Socials from '../Socials';
 
 const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponent, cv = false, socials = false }) => {
   const ref = useRef(null);
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1], [0, 100]);
 
   return (
@@ -31,7 +31,7 @@ const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponen
         </div>
         <div className="flex flex-col justify-center items-center px-3 md:px-5 md:items-start space-y-2 md:space-y-4 w-full md:w-1/2 max-w-lg">
           <h1 className="text-lg md:text-2xl mt-2 md:mt-4">{title}</h1>
-          <div className="text-xs md:text-base text-justify mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d]">
+          <div className="text-sm md:text-base text-justify mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d]">
             <TextComponent />
           </div>
           <div className="flex gap-2 md:gap-4">

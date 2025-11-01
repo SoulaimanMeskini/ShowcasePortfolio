@@ -9,10 +9,12 @@ const DrawPage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 2.4 }}
-      className="w-full"
+      className="w-full h-screen"
     >
-      <Header showLogo={true} animateLogo={false} />
-      <Draw />
+      <Header showLogo={true} />
+      <div className="w-full h-full">
+        <Draw />
+      </div>
     </motion.div>
   );
 };

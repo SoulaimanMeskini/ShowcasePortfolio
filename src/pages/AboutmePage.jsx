@@ -57,7 +57,7 @@ const AboutMePage = () => {
   return (
     <div className="relative w-full h-screen">
       <Header showLogo={showLogo} />
-      <AboutMe setShowLogo={setShowLogo} scrollRef={scrollRef} />
+      <AboutMe scrollRef={scrollRef} />
       <div className="fixed right-4 top-1/2 transform -translate-y-1/2 space-y-2 flex flex-col pr-4 z-50 md:flex hidden">
         <NavButton onClick={() => scrollToSection('section1')} isSelected={selectedSection === 'section1'} label="Go to section 1" />
         <NavButton onClick={() => scrollToSection('section2')} isSelected={selectedSection === 'section2'} label="Go to section 2" />

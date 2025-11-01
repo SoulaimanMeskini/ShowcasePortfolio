@@ -50,13 +50,44 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (canvas) {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Save current canvas state before resizing
+      const savedDrawing = localStorage.getItem('savedDrawing');
+      
+      // Store old dimensions
+      const oldWidth = canvas.width;
+      const oldHeight = canvas.height;
+      
+      // Set new dimensions
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+      
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      
       const renderCtx = canvas.getContext('2d');
       setContext(renderCtx);
-      loadDrawing(renderCtx);
+      
+      // If there's a saved drawing, scale it to new dimensions
+      if (savedDrawing) {
+        const img = new Image();
+        img.src = savedDrawing;
+        img.onload = () => {
+          // Clear canvas
+          renderCtx.clearRect(0, 0, newWidth, newHeight);
+          
+          // Calculate scale factors
+          const scaleX = newWidth / oldWidth;
+          const scaleY = newHeight / oldHeight;
+          
+          // Draw the image scaled to new canvas size
+          renderCtx.drawImage(img, 0, 0, oldWidth, oldHeight, 0, 0, newWidth, newHeight);
+          
+          // Save the resized drawing
+          localStorage.setItem('savedDrawing', canvas.toDataURL());
+        };
+      }
     }
-  }, [loadDrawing, canvasRef]);
+  }, [canvasRef]);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -93,19 +124,42 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
     }
   }, [isHovered]);
 
+  const getCoordinates = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+    
+    const rect = canvas.getBoundingClientRect();
+    if (e.touches) {
+      // Touch event
+      return {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top
+      };
+    } else {
+      // Mouse event
+      return {
+        x: e.nativeEvent.offsetX,
+        y: e.nativeEvent.offsetY
+      };
+    }
+  };
+
   const startDrawing = (e) => {
     if (!enableDrawing || !context) return;
-    const { offsetX, offsetY } = e.nativeEvent;
+    const { x, y } = getCoordinates(e);
     context.beginPath();
-    context.moveTo(offsetX, offsetY);
+    context.moveTo(x, y);
     setIsDrawing(true);
     setShowText(false);
   };
 
   const draw = (e) => {
     if (!enableDrawing || !isDrawing || !context) return;
-    const { offsetX, offsetY } = e.nativeEvent;
-    context.lineTo(offsetX, offsetY);
+    if (e.cancelable) {
+      e.preventDefault(); // Prevent scrolling while drawing on mobile
+    }
+    const { x, y } = getCoordinates(e);
+    context.lineTo(x, y);
     context.stroke();
     saveDrawing();
   };
@@ -125,21 +179,28 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (enableDrawing && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
       setShowKeyboardWarning(true);
       setTimeout(() => {
         setShowKeyboardWarning(false);
       }, 2000);
     }
-  };
+  }, [enableDrawing]);
+
+  useEffect(() => {
+    if (context && enableDrawing) {
+      context.strokeStyle = 'black';
+      context.lineWidth = 2;
+    }
+  }, [context, enableDrawing]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
   const getScalingValue = () => {
     const isStored = localStorage.getItem('savedDrawing') ? true : false;
@@ -161,25 +222,28 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
   };
 
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-center"
+    <div className="relative w-full h-full md:h-screen flex flex-col items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full"
-        style={{ transformOrigin: 'top left', zIndex: 10 }}
+        style={{ transformOrigin: 'top left', zIndex: 10, touchAction: 'none' }}
         onMouseDown={enableDrawing ? startDrawing : null}
         onMouseUp={enableDrawing ? stopDrawing : null}
         onMouseMove={enableDrawing ? draw : null}
         onMouseOut={enableDrawing ? stopDrawing : null}
+        onTouchStart={enableDrawing ? startDrawing : null}
+        onTouchEnd={enableDrawing ? stopDrawing : null}
+        onTouchMove={enableDrawing ? draw : null}
       />
-      <FollowingEyes
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-        style={{ zIndex: 20 }}
-        scalingFactor={paintingScalingFactor}
-        upscale={getScalingValue()}
-      />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ zIndex: 20 }}>
+        <FollowingEyes
+          scalingFactor={paintingScalingFactor}
+          upscale={getScalingValue()}
+        />
+      </div>
       {showKeyboardWarning && (
         <div className="absolute w-full text-center z-40">
           <div className="inline-block bg-red-600 text-white text-lg p-3 rounded-lg">
@@ -202,7 +266,7 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
         />
       )}
       {!enableDrawing && (
-        <Link to="/draw" className="absolute inset-0 z-20">
+        <Link to="/draw" className="absolute inset-0 z-20 hidden md:block">
           <motion.div
             className="text-lg font-bold text-[#1d1d1d] transform rotate-45"
             variants={hoverVariants}

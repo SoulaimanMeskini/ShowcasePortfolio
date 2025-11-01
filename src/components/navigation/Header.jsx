@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeaderBubbleComponent from './HeaderBubble';
 import CustomLogo from '../svg/CustomLogo';
+import FollowingEyes from '../FollowingEyes';
 import useScrollVisibility from '../hooks/useScrollVisibility';
 
-const Header = ({ showLogo, isLookbookPage }) => {
+const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
   const scrollDirection = useScrollVisibility();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -50,6 +51,13 @@ const Header = ({ showLogo, isLookbookPage }) => {
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <HeaderBubbleComponent />
         </div>
+        {showEyes && (
+          <div className="absolute right-5 hidden md:block">
+            <div className="scale-50">
+              <FollowingEyes scalingFactor={0.5} />
+            </div>
+          </div>
+        )}
       </motion.div>
   );
 };

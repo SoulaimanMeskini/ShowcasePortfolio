@@ -1,37 +1,45 @@
 import React, { useLayoutEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import ProjectTemplate from './ProjectTemplate';
-import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectTitle4, ProjectText1, ProjectText2, ProjectText3, ProjectText4 } from '../../text/text';
+import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectTitle4, ProjectTitle5, ProjectTitle6, ProjectText1, ProjectText2, ProjectText3, ProjectText4, ProjectText5, ProjectText6 } from '../../text/text';
 import Footer from '../navigation/Footer';
 
 // Image imports
-import KinderImage1 from '../../assets/project/kinder1.webp';
-import KinderImage2 from '../../assets/project/kinder2.webp';
 import RubyImage1 from '../../assets/project/Ruby1.webp';
 import RubyImage2 from '../../assets/project/Ruby2.webp';
-import RubyImage3 from '../../assets/project/Ruby3.webp';
 import RubyImage4 from '../../assets/project/Ruby4.mp4';
 import SouraikoImage1 from '../../assets/project/Souraiko1.webp';
-import SouraikoImage2 from '../../assets/project/Souraiko2.webp';
+import SouraikoImage2 from '../../assets/project/Souraiko2.mp4';
 import SouraikoImage3 from '../../assets/project/Souraiko3.webp';
 import SouraikoImage4 from '../../assets/project/Souraiko4.webp';
 import ZeldaImage1 from '../../assets/project/zelda1.webp';
 import ZeldaImage2 from '../../assets/project/zelda2.webp';
+import VentilatieImage1 from '../../assets/project/ventilatieland1.webp';
+import VentilatieImage2 from '../../assets/project/ventilatieland2.webp';
+import VentilatieImage3 from '../../assets/project/ventilatieland3.webp';
+import CustomMediaImage1 from '../../assets/project/custommedia1.webp';
+import CustomMediaImage2 from '../../assets/project/custommedia2.webp';
+import CustomMediaPdf from '../../assets/project/custommedia.pdf';
 
-
-const KinderImages = [
-  { src: KinderImage1, alt: 'Kinder Image 1' },
-  { src: KinderImage2, alt: 'Kinder Image 2' }
+const CustomMediaImages = [
+  { src: CustomMediaImage1, alt: 'Custom Media Image 1' },
+  { src: CustomMediaImage2, alt: 'Custom Media Image 2' }
 ];
+
+const VentilatieImages = [
+  { src: VentilatieImage1, alt: 'Ventilatieland Image 1' },
+  { src: VentilatieImage2, alt: 'Ventilatieland Image 2' },
+  { src: VentilatieImage3, alt: 'Ventilatieland Image 3' }
+];
+
 const RubyImages = [
   { src: RubyImage1, alt: 'Ruby Image 1' },
   { src: RubyImage2, alt: 'Ruby Image 2' },
-  // { src: RubyImage3, alt: 'Ruby Image 3' },
   { src: RubyImage4, alt: 'Ruby Video 4' }
 ];
 const SouraikoImages = [
   { src: SouraikoImage1, alt: 'Souraiko Image 1' },
-  { src: SouraikoImage2, alt: 'Souraiko Image 2' },
+  { src: SouraikoImage2, alt: 'Souraiko Video 2' },
   { src: SouraikoImage3, alt: 'Souraiko Image 3' },
   { src: SouraikoImage4, alt: 'Souraiko Image 4' }
 ];
@@ -41,7 +49,7 @@ const ZeldaImages = [
 ];
 
 const Projects = ({ scrollRef }) => {
-  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation()];
+  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation()];
 
   useLayoutEffect(() => {
     const observerOptions = {
@@ -73,10 +81,11 @@ const Projects = ({ scrollRef }) => {
   }, [controlsArray, scrollRef]);
 
   const projectData = [
-    { images: ZeldaImages, title: ProjectTitle4, text: ProjectText4 },
-    { images: SouraikoImages, title: ProjectTitle3, text: ProjectText3 },
-    { images: KinderImages, title: ProjectTitle1, text: ProjectText1 },
-    { images: RubyImages, title: ProjectTitle2, text: ProjectText2 },
+    { images: ZeldaImages, title: ProjectTitle6, text: ProjectText6 },
+    { images: SouraikoImages, title: ProjectTitle5, text: ProjectText5 },
+    { images: CustomMediaImages, title: ProjectTitle1, text: ProjectText1, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: "Visit Articles", pdfUrl: CustomMediaPdf },
+    { images: VentilatieImages, title: ProjectTitle2, text: ProjectText2, link: "https://www.ventilatieland.nl/nl_NL/ontdek-onze-keuzehulp" },
+    { images: RubyImages, title: ProjectTitle4, text: ProjectText4, instagram: "https://www.instagram.com/rubymus.ic/", centerVideo: true },
   ];
 
   return (
@@ -88,7 +97,7 @@ const Projects = ({ scrollRef }) => {
         <motion.section
           key={index + "project"}
           id={`section${index + 1}`}
-          className="project-section h-full w-full md:snap-center flex justify-center items-center"
+          className="project-section min-h-screen w-full md:h-full md:snap-center flex justify-center items-center py-8 md:py-0"
           initial={{ opacity: 0 }}
           animate={controlsArray[index]}
           transition={{ duration: 0.7 }}
@@ -99,6 +108,11 @@ const Projects = ({ scrollRef }) => {
             text={data.text}
             imgStyles={{ width: '90%' }}
             videoStyles={{ width: '90%', height: 'auto' }}
+            instagram={data.instagram}
+            link={data.link}
+            linkText={data.linkText}
+            centerVideo={data.centerVideo}
+            pdfUrl={data.pdfUrl}
           />
         </motion.section>
       ))}

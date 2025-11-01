@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect, useMemo } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Footer from '../navigation/Footer';
 import SectionTemplate from "./SectionTemplate";
 import SectionOne from "./SectionOne";
+import DrawingSection from "./DrawingSection";
 import {
   AboutTitle1,
   AboutTitle2,
@@ -18,7 +19,7 @@ import AboutMeImage1 from "../../assets/about/AboutMeImage1.webp";
 import AboutMeImage2 from "../../assets/about/AboutMeImage2.webp";
 import AboutMeImage3 from "../../assets/about/AboutMeImage3.webp";
 
-const aboutSectionsData = [
+const baseSectionsData = [
   {
     id: "section1",
     component: SectionOne,
@@ -51,33 +52,54 @@ const aboutSectionsData = [
   },
 ];
 
-const AboutMe = ({ setShowLogo, scrollRef }) => {
-  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation()];
+const drawingSectionData = {
+  id: "section1b",
+  component: DrawingSection,
+};
 
-  useLayoutEffect(() => {
-    const handleScroll = () => {
-      const sections = aboutSectionsData.map(({ id }) => document.getElementById(id));
-      const visibleSection = sections.find((section) => {
-        const rect = section.getBoundingClientRect();
-        return rect.top <= 0 && rect.bottom > 0;
-      });
+const AboutMe = ({ scrollRef }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasDrawing, setHasDrawing] = useState(false);
 
-      setShowLogo(visibleSection && visibleSection.id !== "section1");
+  // Create animation controls for maximum possible sections (5)
+  const controls1 = useAnimation();
+  const controls2 = useAnimation();
+  const controls3 = useAnimation();
+  const controls4 = useAnimation();
+  const controls5 = useAnimation();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
 
-    const debouncedHandleScroll = debounce(handleScroll, 100);
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", debouncedHandleScroll);
-      handleScroll(); 
-    }
+    const checkDrawing = () => {
+      setHasDrawing(!!localStorage.getItem('savedDrawing'));
+    };
+
+    checkMobile();
+    checkDrawing();
+
+    window.addEventListener('resize', checkMobile);
+    const interval = setInterval(checkDrawing, 1000);
 
     return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener("scroll", debouncedHandleScroll);
-      }
+      window.removeEventListener('resize', checkMobile);
+      clearInterval(interval);
     };
-  }, [setShowLogo, scrollRef]);
+  }, []);
+
+  const aboutSectionsData = useMemo(() => {
+    if (isMobile && hasDrawing) {
+      return [baseSectionsData[0], drawingSectionData, ...baseSectionsData.slice(1)];
+    }
+    return baseSectionsData;
+  }, [isMobile, hasDrawing]);
+
+  const controlsArray = useMemo(() => {
+    const allControls = [controls1, controls2, controls3, controls4, controls5];
+    return allControls.slice(0, aboutSectionsData.length);
+  }, [aboutSectionsData.length, controls1, controls2, controls3, controls4, controls5]);
 
   useLayoutEffect(() => {
     const observerOptions = {
@@ -107,14 +129,6 @@ const AboutMe = ({ setShowLogo, scrollRef }) => {
       sections.forEach((section) => observer.unobserve(section));
     };
   }, [controlsArray, scrollRef]);
-
-  const debounce = (func, wait) => {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  };
 
   return (
     <div

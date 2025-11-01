@@ -20,26 +20,16 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const firstSection = document.getElementById('section1');
-      const secondSection = document.getElementById('section2');
-      const thirdSection = document.getElementById('section3');
-      const fourthSection = document.getElementById('section4');
+      const sections = ['section1', 'section2', 'section3', 'section4', 'section5'].map(id => document.getElementById(id));
+      
+      const visibleSection = sections.find(section => {
+        if (!section) return false;
+        const rect = section.getBoundingClientRect();
+        return rect.top <= 0 && rect.bottom > 0;
+      });
 
-      if (firstSection && secondSection && thirdSection && fourthSection) {
-        const firstBounding = firstSection.getBoundingClientRect();
-        const secondBounding = secondSection.getBoundingClientRect();
-        const thirdBounding = thirdSection.getBoundingClientRect();
-        const fourthBounding = fourthSection.getBoundingClientRect();
-
-        if (firstBounding.top <= 0 && firstBounding.bottom > 0) {
-          setSelectedSection('section1');
-        } else if (secondBounding.top <= 0 && secondBounding.bottom > 0) {
-          setSelectedSection('section2');
-        } else if (thirdBounding.top <= 0 && thirdBounding.bottom > 0) {
-          setSelectedSection('section3');
-        } else if (fourthBounding.top <= 0 && fourthBounding.bottom > 0) {
-          setSelectedSection('section4');
-        }
+      if (visibleSection) {
+        setSelectedSection(visibleSection.id);
       }
     };
 
@@ -58,7 +48,7 @@ const ProjectsPage = () => {
 
   return (
     <div className="relative w-full h-screen flex flex-col">
-      <Header showLogo={true} animateLogo={false} />
+      <Header showLogo={true} showEyes={true} />
       <div className="flex-grow">
         <Projects scrollRef={scrollRef} />
       </div>
@@ -67,6 +57,7 @@ const ProjectsPage = () => {
         <NavButton onClick={() => scrollToSection('section2')} isSelected={selectedSection === 'section2'} />
         <NavButton onClick={() => scrollToSection('section3')} isSelected={selectedSection === 'section3'} />
         <NavButton onClick={() => scrollToSection('section4')} isSelected={selectedSection === 'section4'} />
+        <NavButton onClick={() => scrollToSection('section5')} isSelected={selectedSection === 'section5'} />
       </div>
     </div>
   );
