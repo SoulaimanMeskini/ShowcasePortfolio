@@ -19,7 +19,6 @@ import VentilatieImage2 from '../../assets/project/ventilatieland2.webp';
 import VentilatieImage3 from '../../assets/project/ventilatieland3.webp';
 import CustomMediaImage1 from '../../assets/project/custommedia1.webp';
 import CustomMediaImage2 from '../../assets/project/custommedia2.webp';
-import CustomMediaPdf from '../../assets/project/custommedia.pdf';
 
 const CustomMediaImages = [
   { src: CustomMediaImage1, alt: 'Custom Media Image 1' },
@@ -83,7 +82,7 @@ const Projects = ({ scrollRef }) => {
   const projectData = [
     { images: ZeldaImages, title: ProjectTitle6, text: ProjectText6 },
     { images: SouraikoImages, title: ProjectTitle5, text: ProjectText5 },
-    { images: CustomMediaImages, title: ProjectTitle1, text: ProjectText1, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: "Visit Articles", pdfUrl: CustomMediaPdf },
+    { images: CustomMediaImages, title: ProjectTitle1, text: ProjectText1, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: "Visit Articles", pdfUrl: "/custommedia.pdf" },
     { images: VentilatieImages, title: ProjectTitle2, text: ProjectText2, link: "https://www.ventilatieland.nl/nl_NL/ontdek-onze-keuzehulp" },
     { images: RubyImages, title: ProjectTitle4, text: ProjectText4, instagram: "https://www.instagram.com/rubymus.ic/", centerVideo: true },
   ];
