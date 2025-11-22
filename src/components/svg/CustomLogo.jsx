@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../ThemeProvider";
 
 const CustomLogo = () => {
   const [color, setColor] = useState("#141414"); // Default color
   const navigate = useNavigate();
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    // Update color based on theme
+    if (theme === 'dark') {
+      setColor("#ffffff");
+    } else {
+      setColor("#141414");
+    }
+  }, [theme]);
 
   const handleMouseEnter = () => {
     setColor("#6f02c6"); // Set color on hover
   };
 
   const handleMouseLeave = () => {
-    setColor("#141414"); // Revert to default color on mouse leave
+    // Revert to default color on mouse leave based on theme
+    if (theme === 'dark') {
+      setColor("#ffffff");
+    } else {
+      setColor("#141414");
+    }
   };
 
   return (

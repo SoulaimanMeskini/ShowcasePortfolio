@@ -14,6 +14,14 @@
   --scrollbar-size: 10px;
 }
 
+.dark {
+  --background-color: #1d1d1d;
+  --primary-text-color: #ffffff;
+  --scrollbar-track-color: #1d1d1d;
+  --scrollbar-thumb-color: #ffffff;
+  --scrollbar-thumb-hover-color: #cccccc;
+}
+
 /* Global styles */
 *,
 *::before,
@@ -149,6 +157,11 @@ mark {
   );
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+  color: var(--primary-text-color);
+}
+
+.dark mark {
+  color: #ffffff;
 }
 
 video::-webkit-media-controls {

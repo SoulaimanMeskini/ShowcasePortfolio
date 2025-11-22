@@ -71,6 +71,7 @@ const ImageGallery = () => {
                 className="block rounded-lg object-cover transition-transform hover:scale-105"
                 alt={`Gallery illustration ${image.id}`}
                 style={{ width: '100%', height: 'auto' }}
+                loading="lazy"
               />
             </div>
           ))}

@@ -51,7 +51,7 @@ export const ProjectText1 = () => (
 
 export const ProjectText2 = () => (
   <p>
-    During my graduation internship at Econox, I had the opportunity to design and develop a <mark>help menu</mark> for the company's webshop Ventilatieland. My work included creating ETIM product pages and improving the user experience within the PIM system Skwirrel. Many visitors on Ventilatieland know what type of product they need but are unsure which brand or model best fits their situation. Instead of leaving the site to search externally, the new help menu guides users to three suitable <mark>product matches</mark> — increasing engagement and conversion rates.
+    During my graduation internship at Econox, I had the opportunity to design and develop a <mark>help menu</mark> for the company's webshop Ventilatieland. My work included creating ETIM product pages and improving the user experience within the PIM system Skwirrel. Many visitors on Ventilatieland know what type of product they need but are unsure which brand or model best fits their situation. Instead of leaving the site to search externally, the new help menu guides users to three suitable <mark>product matches</mark>.
   </p>
 );
 
@@ -76,7 +76,7 @@ export const ProjectText5 = () => (
 export const ProjectText6 = () => (
   <p>
     In this project, I've worked on recreating the iconic intro scene of the original <mark>Legend of Zelda (NES)</mark>, but with a custom twist where you can enter your own name, and it will display "The Legend of [Your Name]." I meticulously recreated all the assets and coded the entire experience using <mark>HTML, CSS, and JavaScript</mark>. Click on <a 
-      href="https://legend-of-zelda-4s1124iwo-soulaimanmeskinis-projects.vercel.app/"
+      href="https://legend-of-zelda-poc.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       style={{ 
@@ -89,6 +89,25 @@ export const ProjectText6 = () => (
     >
       Legend of Zelda (NES)
     </a> to view the project and experience the custom intro for yourself.
+  </p>
+);
+
+export const ProjectTitle7 = "Displini";
+export const ProjectText7 = () => (
+  <>
+    <p>
+      Displini is my ongoing <mark>creative project and productivity app</mark> in one. It showcases modern, playful design while helping you actually improve your habits and daily discipline. With built-in <mark>AI powered by OpenAI</mark>, Displini helps you plan, schedule, reschedule, and turn your day into a clear to-do list.
+    </p>
+    <p className="mt-2">
+      Website, logo and UX is made by me.
+    </p>
+  </>
+);
+
+export const ProjectTitle8 = "Lookbook";
+export const ProjectText8 = () => (
+  <p>
+    My <mark>Lookbook</mark> page is filled with images of my creations, vacations/holidays, friends, nature, myself, and more. It's a glimpse <mark>into my world</mark> outside of work, where I find inspiration and joy in everyday moments.
   </p>
 );
 

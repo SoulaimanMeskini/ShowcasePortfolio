@@ -8,7 +8,7 @@ const Socials = () => {
         href="https://github.com/SoulaimanMeskini"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#1d1d1d] text-3xl transition-colors duration-300 hover:text-[#6f02c6]"
+        className="text-[#1d1d1d] dark:text-white text-3xl transition-colors duration-300 hover:text-[#6f02c6] dark:hover:text-[#6f02c6]"
         aria-label="GitHub"
       >
         <FaGithub />
@@ -18,7 +18,7 @@ const Socials = () => {
         href="https://www.instagram.com/zwittsal"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#1d1d1d] text-3xl transition-colors duration-300 hover:text-[#6f02c6]"
+        className="text-[#1d1d1d] dark:text-white text-3xl transition-colors duration-300 hover:text-[#6f02c6] dark:hover:text-[#6f02c6]"
         aria-label="Instagram"
       >
         <FaInstagram />
@@ -28,7 +28,7 @@ const Socials = () => {
         href="https://www.linkedin.com/in/soulaiman-meskini-822b761a9/"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#1d1d1d] text-3xl transition-colors duration-300 hover:text-[#6f02c6]"
+        className="text-[#1d1d1d] dark:text-white text-3xl transition-colors duration-300 hover:text-[#6f02c6] dark:hover:text-[#6f02c6]"
         aria-label="LinkedIn"
       >
         <FaLinkedin />

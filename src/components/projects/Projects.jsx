@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import ProjectTemplate from './ProjectTemplate';
-import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectTitle4, ProjectTitle5, ProjectTitle6, ProjectText1, ProjectText2, ProjectText3, ProjectText4, ProjectText5, ProjectText6 } from '../../text/text';
+import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectTitle4, ProjectTitle5, ProjectTitle6, ProjectTitle7, ProjectTitle8, ProjectText1, ProjectText2, ProjectText3, ProjectText4, ProjectText5, ProjectText6, ProjectText7, ProjectText8 } from '../../text/text';
 import Footer from '../navigation/Footer';
 
 // Image imports
@@ -19,6 +19,9 @@ import VentilatieImage2 from '../../assets/project/ventilatieland2.webp';
 import VentilatieImage3 from '../../assets/project/ventilatieland3.webp';
 import CustomMediaImage1 from '../../assets/project/custommedia1.webp';
 import CustomMediaImage2 from '../../assets/project/custommedia2.webp';
+import DispliniImage1 from '../../assets/project/Displini1.svg';
+import DispliniImage2 from '../../assets/project/Displini2.svg';
+import DispliniImage4 from '../../assets/project/Displini4.png';
 
 const CustomMediaImages = [
   { src: CustomMediaImage1, alt: 'Custom Media Image 1' },
@@ -47,8 +50,14 @@ const ZeldaImages = [
   { src: ZeldaImage2, alt: 'Zelda Image 2' }
 ];
 
+const DispliniImages = [
+  { src: DispliniImage1, alt: 'Displini Image 1' },
+  { src: DispliniImage2, alt: 'Displini Image 2' },
+  { src: DispliniImage4, alt: 'Displini Image 4', center: true }
+];
+
 const Projects = ({ scrollRef }) => {
-  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation()];
+  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation()];
 
   useLayoutEffect(() => {
     const observerOptions = {
@@ -80,11 +89,13 @@ const Projects = ({ scrollRef }) => {
   }, [controlsArray, scrollRef]);
 
   const projectData = [
-    { images: ZeldaImages, title: ProjectTitle6, text: ProjectText6 },
+    { images: ZeldaImages, title: ProjectTitle6, text: ProjectText6, link: "https://legend-of-zelda-poc.vercel.app/", linkText: "View Project" },
+    { images: DispliniImages, title: ProjectTitle7, text: ProjectText7, link: "https://displini.com/", linkText: "Visit Displini" },
     { images: SouraikoImages, title: ProjectTitle5, text: ProjectText5 },
     { images: CustomMediaImages, title: ProjectTitle1, text: ProjectText1, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: "Visit Articles", pdfUrl: "/custommedia.pdf" },
     { images: VentilatieImages, title: ProjectTitle2, text: ProjectText2, link: "https://www.ventilatieland.nl/nl_NL/ontdek-onze-keuzehulp" },
     { images: RubyImages, title: ProjectTitle4, text: ProjectText4, instagram: "https://www.instagram.com/rubymus.ic/", centerVideo: true },
+    { title: ProjectTitle8, text: ProjectText8, link: "/lookbook", linkText: "View Lookbook", centerText: true },
   ];
 
   return (
@@ -112,10 +123,11 @@ const Projects = ({ scrollRef }) => {
             linkText={data.linkText}
             centerVideo={data.centerVideo}
             pdfUrl={data.pdfUrl}
+            centerText={data.centerText}
           />
         </motion.section>
       ))}
-      <div className="footer w-full md:hidden">
+      <div className="footer w-full md:hidden pb-32 pt-8">
         <Footer />
       </div>
     </div>

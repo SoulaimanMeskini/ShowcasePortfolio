@@ -20,7 +20,7 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['section1', 'section2', 'section3', 'section4', 'section5'].map(id => document.getElementById(id));
+      const sections = ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'].map(id => document.getElementById(id));
       
       const visibleSection = sections.find(section => {
         if (!section) return false;
@@ -58,6 +58,8 @@ const ProjectsPage = () => {
         <NavButton onClick={() => scrollToSection('section3')} isSelected={selectedSection === 'section3'} />
         <NavButton onClick={() => scrollToSection('section4')} isSelected={selectedSection === 'section4'} />
         <NavButton onClick={() => scrollToSection('section5')} isSelected={selectedSection === 'section5'} />
+        <NavButton onClick={() => scrollToSection('section6')} isSelected={selectedSection === 'section6'} />
+        <NavButton onClick={() => scrollToSection('section7')} isSelected={selectedSection === 'section7'} />
       </div>
     </div>
   );

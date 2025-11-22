@@ -4,6 +4,7 @@ import FollowingEyes from './FollowingEyes';
 import NavDraw from './navigation/NavDraw';
 import { useLocation, Link } from 'react-router-dom';
 import ClickMe from './svg/ClickMe';
+import { useTheme } from './ThemeProvider';
 
 const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { top: '10%', left: '10%' } }) => {
   const canvasRef = useRef(null);
@@ -15,6 +16,8 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
   const [showKeyboardWarning, setShowKeyboardWarning] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const { theme } = useTheme();
 
   const saveDrawing = useCallback(() => {
     const canvas = canvasRef.current;
@@ -110,8 +113,8 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
       const ctx = canvas.getContext('2d');
       setContext(ctx);
       
-      // Set drawing properties
-      ctx.strokeStyle = 'black';
+      // Set drawing properties based on theme
+      ctx.strokeStyle = theme === 'dark' ? 'white' : 'black';
       ctx.lineWidth = 2;
       
       // Load saved drawing
@@ -124,7 +127,16 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
       window.removeEventListener('resize', resizeCanvas);
       resizeObserver.disconnect();
     };
-  }, [resizeCanvas, loadDrawing]);
+  }, [resizeCanvas, loadDrawing, theme]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!isHovered) {
@@ -201,10 +213,64 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
 
   useEffect(() => {
     if (context && enableDrawing) {
-      context.strokeStyle = 'black';
+      const oldColor = context.strokeStyle;
+      const newColor = theme === 'dark' ? 'white' : 'black';
+      context.strokeStyle = newColor;
       context.lineWidth = 2;
+      
+      // If there's a saved drawing and color changed, redraw with new color
+      const savedDrawing = localStorage.getItem('savedDrawing');
+      if (savedDrawing && oldColor !== newColor) {
+        const canvas = canvasRef.current;
+        if (canvas) {
+          // Clear canvas
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Load the saved image
+          const img = new Image();
+          img.src = savedDrawing;
+          img.onload = () => {
+            // Draw the image
+            context.drawImage(img, 0, 0);
+            
+            // If switching from dark to light (white to black), invert the colors
+            if (oldColor === 'white' && newColor === 'black') {
+              const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+              const data = imageData.data;
+              
+              // Invert the colors (white becomes black)
+              for (let i = 0; i < data.length; i += 4) {
+                if (data[i + 3] > 0) { // If pixel is not transparent
+                  data[i] = 255 - data[i];     // R
+                  data[i + 1] = 255 - data[i + 1]; // G
+                  data[i + 2] = 255 - data[i + 2]; // B
+                }
+              }
+              
+              context.putImageData(imageData, 0, 0);
+              saveDrawing(); // Save the inverted version
+            } else if (oldColor === 'black' && newColor === 'white') {
+              // If switching from light to dark (black to white), invert the colors
+              const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+              const data = imageData.data;
+              
+              // Invert the colors (black becomes white)
+              for (let i = 0; i < data.length; i += 4) {
+                if (data[i + 3] > 0) { // If pixel is not transparent
+                  data[i] = 255 - data[i];     // R
+                  data[i + 1] = 255 - data[i + 1]; // G
+                  data[i + 2] = 255 - data[i + 2]; // B
+                }
+              }
+              
+              context.putImageData(imageData, 0, 0);
+              saveDrawing(); // Save the inverted version
+            }
+          };
+        }
+      }
     }
-  }, [context, enableDrawing]);
+  }, [context, enableDrawing, theme]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -240,14 +306,14 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full"
-        style={{ transformOrigin: 'top left', zIndex: 10, touchAction: 'none' }}
-        onMouseDown={enableDrawing ? startDrawing : null}
-        onMouseUp={enableDrawing ? stopDrawing : null}
-        onMouseMove={enableDrawing ? draw : null}
-        onMouseOut={enableDrawing ? stopDrawing : null}
-        onTouchStart={enableDrawing ? startDrawing : null}
-        onTouchEnd={enableDrawing ? stopDrawing : null}
-        onTouchMove={enableDrawing ? draw : null}
+        style={{ transformOrigin: 'top left', zIndex: 10, touchAction: isMobile ? 'auto' : 'none' }}
+        onMouseDown={enableDrawing && !isMobile ? startDrawing : null}
+        onMouseUp={enableDrawing && !isMobile ? stopDrawing : null}
+        onMouseMove={enableDrawing && !isMobile ? draw : null}
+        onMouseOut={enableDrawing && !isMobile ? stopDrawing : null}
+        onTouchStart={null}
+        onTouchEnd={null}
+        onTouchMove={null}
       />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ zIndex: 20 }}>
         <FollowingEyes
@@ -262,11 +328,11 @@ const Draw = ({ enableDrawing = true, enableLink = false, clickMePosition = { to
           </div>
         </div>
       )}
-      {enableDrawing && (
+      {enableDrawing && !isMobile && (
         <NavDraw
           onPencilClick={() => {
             if (context) {
-              context.strokeStyle = 'black';
+              context.strokeStyle = theme === 'dark' ? 'white' : 'black';
               context.lineWidth = 2;
             }
             setShowText(false); // Hide text when pencil button is clicked

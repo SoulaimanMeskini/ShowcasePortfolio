@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useTheme } from "./ThemeProvider";
 import EyesLayout from "../assets/Eyeslayout.webp";
 import EyeBall from "../assets/Eyeball.webp";
 
@@ -9,6 +10,7 @@ import EyeBall from "../assets/Eyeball.webp";
  */
 const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
   const [mousePosition, setMousePosition] = useState({ x: "50%", y: "50%" });
+  const { theme } = useTheme();
 
   const handleMouseMove = useCallback((event) => {
     const x = (event.clientX * 100) / window.innerWidth;
@@ -25,7 +27,10 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
 
   const defaultWidtLayout = (250 * upscale) * scalingFactor;
   const defaultHightLayout = (130 * upscale) * scalingFactor;
-  const classNameStringLayout = `relative w-[${defaultWidtLayout}px] h-[${defaultHightLayout}px] flex justify-center items-center rounded-full overflow-hidden border-8 border-[#f5f5f5] max-sm:w-[130px] max-sm:h-[70px]`;
+  const borderColor = theme === 'dark' ? '#1d1d1d' : '#f5f5f5';
+  // Use the same background color as the page (from CSS variable)
+  const backgroundColor = theme === 'dark' ? '#1d1d1d' : 'transparent';
+  const classNameStringLayout = `relative w-[${defaultWidtLayout}px] h-[${defaultHightLayout}px] flex justify-center items-center rounded-full overflow-hidden border-8 max-sm:w-[130px] max-sm:h-[70px]`;
 
   const defaultDiameterEyeball = (90 * upscale) * scalingFactor;
   const classNameStringEyeball = `absolute w-[${defaultDiameterEyeball}px] h-[${defaultDiameterEyeball}px] top-[50%] left-[50%] rounded-full max-sm:w-12 max-sm:h-12`;
@@ -34,7 +39,7 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
   const Eye = ({ mousePosition }) => {
     return (
       <div className="relative flex justify-center items-center" style={{ margin: "0 10%" }}>
-        <div className={classNameStringLayout}>
+        <div className={classNameStringLayout} style={{ borderColor: borderColor, backgroundColor: backgroundColor }}>
           <img
             className={classNameStringEyeball}
             src={EyeBall}
@@ -43,7 +48,8 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
               top: mousePosition.y,
               transform: `translate(-${mousePosition.x}, -${mousePosition.y})`,
               userSelect: "none",
-              pointerEvents: "none"
+              pointerEvents: "none",
+              filter: theme === 'dark' ? 'invert(1) brightness(2)' : 'none'
             }}
             draggable="false"
             alt="Eye Ball"
@@ -53,7 +59,8 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
             src={EyesLayout}
             style={{
               userSelect: "none",
-              pointerEvents: "none"
+              pointerEvents: "none",
+              filter: theme === 'dark' ? 'invert(1) brightness(2)' : 'none'
             }}
             draggable="false"
             alt="Eye Layout"

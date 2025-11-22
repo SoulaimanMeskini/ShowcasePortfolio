@@ -5,6 +5,7 @@ import MouseAnimation from '../animations/MouseAnimation';
 import SwipeAnimation from '../animations/SwipeAnimation';
 import Draw from '../Draw';
 import AnimatedEyes from '../AnimatedEyes';
+import { useTheme } from '../ThemeProvider';
 
 const SectionOne = () => {
   const ref = useRef(null);

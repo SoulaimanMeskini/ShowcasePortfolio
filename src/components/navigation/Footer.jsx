@@ -1,9 +1,16 @@
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { useTheme } from '../ThemeProvider';
 
 const Footer = ({ width = '380px', height = '55px' }) => {
+  const { theme } = useTheme();
+  
   return (
     <footer
-      className="bg-[#1d1d1d] text-[#f5f5f5] px-6 py-1 mb-5 rounded-full flex justify-between items-center mx-auto"
+      className={`${
+        theme === 'dark' 
+          ? 'bg-[#1d1d1d] text-[#f5f5f5]' 
+          : 'bg-[#f5f5f5] text-[#1d1d1d]'
+      } px-6 py-1 mb-5 rounded-full flex justify-between items-center mx-auto`}
       style={{
         width: '100%', // make width 100% to allow responsive adjustments
         maxWidth: width, // set the maxWidth for large screens
@@ -19,7 +26,11 @@ const Footer = ({ width = '380px', height = '55px' }) => {
           href="https://github.com/SoulaimanMeskini"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#f5f5f5] text-2xl transition-colors duration-300 hover:text-[#6f02c6]"
+          className={`${
+            theme === 'dark' 
+              ? 'text-[#f5f5f5]' 
+              : 'text-[#1d1d1d]'
+          } text-2xl transition-colors duration-300 hover:text-[#6f02c6]`}
           aria-label="GitHub"
         >
           <FaGithub />
@@ -29,7 +40,11 @@ const Footer = ({ width = '380px', height = '55px' }) => {
           href="https://www.instagram.com/zwittsal"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#f5f5f5] text-2xl transition-colors duration-300 hover:text-[#6f02c6]"
+          className={`${
+            theme === 'dark' 
+              ? 'text-[#f5f5f5]' 
+              : 'text-[#1d1d1d]'
+          } text-2xl transition-colors duration-300 hover:text-[#6f02c6]`}
           aria-label="Instagram"
         >
           <FaInstagram />
@@ -39,7 +54,11 @@ const Footer = ({ width = '380px', height = '55px' }) => {
           href="https://www.linkedin.com/in/soulaiman-meskini-822b761a9/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#f5f5f5] text-2xl transition-colors duration-300 hover:text-[#6f02c6]"
+          className={`${
+            theme === 'dark' 
+              ? 'text-[#f5f5f5]' 
+              : 'text-[#1d1d1d]'
+          } text-2xl transition-colors duration-300 hover:text-[#6f02c6]`}
           aria-label="LinkedIn"
         >
           <FaLinkedin />

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../ThemeProvider';
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { theme } = useTheme();
 
   const toggleVisibility = () => {
     setIsVisible(window.scrollY > window.innerHeight / 2); 
@@ -37,7 +39,11 @@ const ScrollToTopButton = () => {
         <>
           <motion.button
             onClick={scrollToTop}
-            className="fixed bottom-10 right-8 w-12 h-12 bg-[#1d1d1d] text-[#f5f5f5] rounded-full transition-transform duration-300 hover:scale-110 hover:bg-[#6f02c6] flex items-center justify-center z-[1000]"
+            className={`fixed bottom-10 right-8 w-12 h-12 ${
+              theme === 'dark' 
+                ? 'bg-white text-[#1d1d1d]' 
+                : 'bg-[#1d1d1d] text-[#f5f5f5]'
+            } rounded-full transition-transform duration-300 hover:scale-110 hover:bg-[#6f02c6] flex items-center justify-center z-[1000]`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -67,7 +73,7 @@ const ScrollToTopButton = () => {
           >
             <svg width="100" height="50" viewBox="0 0 100 50">
               <path id="topTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0" />
-              <text fontSize="14" fill="#1d1d1d">
+              <text fontSize="14" fill={theme === 'dark' ? '#1d1d1d' : '#ffffff'}>
                 <textPath href="#topTextPath" startOffset="50%" textAnchor="middle">
                   TO TOP
                 </textPath>
