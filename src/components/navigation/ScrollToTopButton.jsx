@@ -73,7 +73,7 @@ const ScrollToTopButton = () => {
           >
             <svg width="100" height="50" viewBox="0 0 100 50">
               <path id="topTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0" />
-              <text fontSize="14" fill={theme === 'dark' ? '#1d1d1d' : '#ffffff'}>
+              <text fontSize="14" fill={theme === 'dark' ? '#ffffff' : '#1d1d1d'}>
                 <textPath href="#topTextPath" startOffset="50%" textAnchor="middle">
                   TO TOP
                 </textPath>

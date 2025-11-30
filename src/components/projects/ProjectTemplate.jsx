@@ -75,17 +75,11 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
             {pdfUrl && (
               <a
                 href={pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                type="application/pdf"
+                download
                 className="inline-flex items-center text-[#1d1d1d] dark:text-white hover:text-[#6f02c6] dark:hover:text-[#6f02c6] transition-colors duration-300"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(pdfUrl, '_blank');
-                }}
               >
                 <FaFileAlt className="text-xl md:text-2xl" />
-                <span className="ml-2 text-sm md:text-base font-semibold underline">View Designs (PDF)</span>
+                <span className="ml-2 text-sm md:text-base font-semibold underline">Download Designs (PDF)</span>
               </a>
             )}
           </div>

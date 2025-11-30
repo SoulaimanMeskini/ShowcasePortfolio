@@ -13,7 +13,7 @@ const LookbookPage = () => {
       transition={{ duration: 2.4 }}
       className="w-full"
     >
-      <Header showLogo={true} showEyes={true} /> 
+      <Header showLogo={true} showEyes={false} isLookbookPage={true} /> 
       <div className="w-full absolute top-0" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)' }}>
       </div>
       <Lookbook />
