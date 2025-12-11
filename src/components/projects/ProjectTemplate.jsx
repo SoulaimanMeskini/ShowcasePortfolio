@@ -37,7 +37,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
           <div className={`text-sm md:text-base ${centerText ? '' : 'text-justify'} mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d] dark:text-white`}>
             <TextComponent />
           </div>
-          <div className="flex flex-col gap-2 mt-2">
+          <div className={`flex flex-col gap-2 mt-2 ${centerText ? 'items-center' : ''}`}>
             {link && (
               <>
                 {link.startsWith('/') ? (

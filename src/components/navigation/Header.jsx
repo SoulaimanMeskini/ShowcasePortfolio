@@ -30,10 +30,8 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
   return (
       <motion.div
         className={`fixed top-0 z-[998] h-[80px] w-full flex items-center p-5 overflow-hidden transition-colors duration-300 ${
-          isLookbookPage 
-            ? theme === 'dark' 
-              ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md' 
-              : 'bg-[#1d1d1d] bg-opacity-30 backdrop-blur-md'
+          isLookbookPage
+            ? 'bg-transparent'
             : theme === 'dark'
               ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md'
               : 'bg-transparent'
