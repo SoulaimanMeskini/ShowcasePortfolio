@@ -4,53 +4,10 @@ import Footer from '../navigation/Footer';
 import SectionTemplate from "./SectionTemplate";
 import SectionOne from "./SectionOne";
 import DrawingSection from "./DrawingSection";
-import {
-  AboutTitle1,
-  AboutTitle2,
-  AboutText1,
-  AboutText2,
-  AboutImgText1,
-  AboutImgText2,
-  AboutTitle3,
-  AboutText3,
-  AboutImgText3,
-} from "../../text/text";
+import { useLanguage } from "../LanguageProvider";
 import AboutMeImage1 from "../../assets/about/AboutMeImage1.webp";
 import AboutMeImage2 from "../../assets/about/AboutMeImage2.webp";
 import AboutMeImage3 from "../../assets/about/AboutMeImage3.webp";
-
-const baseSectionsData = [
-  {
-    id: "section1",
-    component: SectionOne,
-  },
-  {
-    id: "section2",
-    imgsource: AboutMeImage1,
-    imgalt: "Portrait",
-    imgtext: AboutImgText1,
-    title: AboutTitle1,
-    text: AboutText1,
-  },
-  {
-    id: "section3",
-    imgsource: AboutMeImage2,
-    imgalt: "Van Gogh",
-    imgtext: AboutImgText2,
-    title: AboutTitle2,
-    text: AboutText2,
-    cv: true,
-  },
-  {
-    id: "section4",
-    imgsource: AboutMeImage3,
-    imgalt: "Modern Portrait",
-    imgtext: AboutImgText3,
-    title: AboutTitle3,
-    text: AboutText3,
-    socials: true,
-  },
-];
 
 const drawingSectionData = {
   id: "section1b",
@@ -60,6 +17,7 @@ const drawingSectionData = {
 const AboutMe = ({ scrollRef }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [hasDrawing, setHasDrawing] = useState(false);
+  const { t } = useLanguage();
 
   // Create animation controls for maximum possible sections (5)
   const controls1 = useAnimation();
@@ -90,11 +48,44 @@ const AboutMe = ({ scrollRef }) => {
   }, []);
 
   const aboutSectionsData = useMemo(() => {
+    const baseSectionsData = [
+      {
+        id: "section1",
+        component: SectionOne,
+      },
+      {
+        id: "section2",
+        imgsource: AboutMeImage1,
+        imgalt: "Portrait",
+        imgtext: t.about.imgText.one,
+        title: t.about.titles.one,
+        text: t.about.texts.one,
+      },
+      {
+        id: "section3",
+        imgsource: AboutMeImage2,
+        imgalt: "Van Gogh",
+        imgtext: t.about.imgText.two,
+        title: t.about.titles.two,
+        text: t.about.texts.two,
+        cv: true,
+      },
+      {
+        id: "section4",
+        imgsource: AboutMeImage3,
+        imgalt: "Modern Portrait",
+        imgtext: t.about.imgText.three,
+        title: t.about.titles.three,
+        text: t.about.texts.three,
+        socials: true,
+      },
+    ];
+
     if (isMobile && hasDrawing) {
       return [baseSectionsData[0], drawingSectionData, ...baseSectionsData.slice(1)];
     }
     return baseSectionsData;
-  }, [isMobile, hasDrawing]);
+  }, [isMobile, hasDrawing, t]);
 
   const controlsArray = useMemo(() => {
     const allControls = [controls1, controls2, controls3, controls4, controls5];

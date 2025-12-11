@@ -5,11 +5,13 @@ import CustomLogo from '../svg/CustomLogo';
 import FollowingEyes from '../FollowingEyes';
 import useScrollVisibility from '../hooks/useScrollVisibility';
 import { useTheme } from '../ThemeProvider';
+import { useLanguage } from '../LanguageProvider';
 
 const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
   const scrollDirection = useScrollVisibility();
   const [isHovered, setIsHovered] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -30,9 +32,9 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
   return (
       <motion.div
         className={`fixed top-0 z-[998] h-[80px] w-full flex items-center p-5 overflow-hidden transition-colors duration-300 ${
-          isLookbookPage
-            ? theme === 'dark'
-              ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md'
+          isLookbookPage 
+            ? theme === 'dark' 
+              ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md' 
               : 'bg-transparent'
             : theme === 'dark'
               ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md'
@@ -66,7 +68,14 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
             </div>
           </div>
         )}
-        <div className={`absolute ${showEyes ? 'right-5' : 'right-5 md:right-20'} top-1/2 transform -translate-y-1/2 z-[999]`}>
+        <div className={`absolute ${showEyes ? 'right-5' : 'right-5 md:right-20'} top-1/2 transform -translate-y-1/2 z-[999] flex items-center gap-2`}>
+          <button
+            onClick={toggleLanguage}
+            className="px-3 py-2 rounded-full bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 text-[#1d1d1d] dark:text-white text-sm font-semibold border border-transparent hover:border-gray-300 dark:hover:border-gray-600"
+            aria-label="Toggle language"
+          >
+            {language === 'en' ? 'NL' : 'EN'}
+          </button>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 text-[#1d1d1d] dark:text-white"

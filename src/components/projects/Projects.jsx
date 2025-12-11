@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import ProjectTemplate from './ProjectTemplate';
-import { ProjectTitle1, ProjectTitle2, ProjectTitle3, ProjectTitle4, ProjectTitle5, ProjectTitle6, ProjectTitle7, ProjectTitle8, ProjectText1, ProjectText2, ProjectText3, ProjectText4, ProjectText5, ProjectText6, ProjectText7, ProjectText8 } from '../../text/text';
 import Footer from '../navigation/Footer';
+import { useLanguage } from '../LanguageProvider';
 
 // Image imports
 import RubyImage1 from '../../assets/project/Ruby1.webp';
@@ -58,6 +58,7 @@ const DispliniImages = [
 
 const Projects = ({ scrollRef }) => {
   const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation()];
+  const { t } = useLanguage();
 
   useLayoutEffect(() => {
     const observerOptions = {
@@ -89,13 +90,13 @@ const Projects = ({ scrollRef }) => {
   }, [controlsArray, scrollRef]);
 
   const projectData = [
-    { images: ZeldaImages, title: ProjectTitle6, text: ProjectText6, link: "https://legend-of-zelda-poc.vercel.app/", linkText: "View Project" },
-    { images: DispliniImages, title: ProjectTitle7, text: ProjectText7, link: "https://displini.com/", linkText: "Visit Displini" },
-    { images: SouraikoImages, title: ProjectTitle5, text: ProjectText5 },
-    { images: CustomMediaImages, title: ProjectTitle1, text: ProjectText1, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: "Visit Articles", pdfUrl: "/custommedia.pdf" },
-    { images: VentilatieImages, title: ProjectTitle2, text: ProjectText2, link: "https://www.ventilatieland.nl/nl_NL/ontdek-onze-keuzehulp" },
-    { images: RubyImages, title: ProjectTitle4, text: ProjectText4, instagram: "https://www.instagram.com/rubymus.ic/", centerVideo: true },
-    { title: ProjectTitle8, text: ProjectText8, link: "/lookbook", linkText: "View Lookbook", centerText: true },
+    { images: ZeldaImages, title: t.projects.titles.zelda, text: t.projects.texts.zelda, link: "https://legend-of-zelda-poc.vercel.app/", linkText: t.projects.linkText.viewProject },
+    { images: DispliniImages, title: t.projects.titles.displini, text: t.projects.texts.displini, link: "https://displini.com/", linkText: t.projects.linkText.visitDisplini },
+    { images: SouraikoImages, title: t.projects.titles.souraiko, text: t.projects.texts.souraiko },
+    { images: CustomMediaImages, title: t.projects.titles.customMedia, text: t.projects.texts.customMedia, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: t.projects.linkText.visitArticles, pdfUrl: "/custommedia.pdf" },
+    { images: VentilatieImages, title: t.projects.titles.ventilatieland, text: t.projects.texts.ventilatieland, link: "https://www.ventilatieland.nl/nl_NL/ontdek-onze-keuzehulp" },
+    { images: RubyImages, title: t.projects.titles.rubyMus, text: t.projects.texts.rubyMus, instagram: "https://www.instagram.com/rubymus.ic/", centerVideo: true },
+    { title: t.projects.titles.lookbook, text: t.projects.texts.lookbook, link: "/lookbook", linkText: t.projects.linkText.viewLookbook, centerText: true },
   ];
 
   return (

@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../ThemeProvider";
-
-const navItems = [
-  { to: "/", label: "About Me" },
-  { to: "/projects", label: "Projects" },
-  { to: "/lookbook", label: "Lookbook" }
-];
+import { useLanguage } from "../LanguageProvider";
 
 const containerVariants = {
   closed: { width: 55, height: 55, borderRadius: 50, transition: { duration: 0.1, ease: "easeInOut" } },
@@ -43,6 +38,13 @@ const Headerbubble = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useLanguage();
+
+  const navItems = [
+    { to: "/", label: t.nav.about },
+    { to: "/projects", label: t.nav.projects },
+    { to: "/lookbook", label: t.nav.lookbook }
+  ];
 
   const handleNavClick = (to) => {
     if (menuOpen) {

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+// PWA off by default; set VITE_ENABLE_PWA=true to enable
 const enablePWA = process.env.VITE_ENABLE_PWA === 'true';
 
 export default defineConfig({
@@ -22,33 +23,26 @@ export default defineConfig({
           scope: '/',
           start_url: '/',
           icons: [
-            {
-              src: '/pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-            },
-            {
-              src: '/pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-            },
-            {
-              src: '/pwa-maskable-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-              purpose: 'maskable',
-            },
-            {
-              src: '/pwa-maskable-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'maskable',
-            },
+            { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+            { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+            { src: '/pwa-maskable-192x192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+            { src: '/pwa-maskable-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
           ],
         },
         workbox: {
-          // Precache core assets only; large media excluded
+          // Precache core assets only; exclude heavy media
           globPatterns: ['**/*.{js,css,html,png,jpg,svg,ico,webp}'],
+          maximumFileSizeToCacheInBytes: 12 * 1024 * 1024, // 12 MB cap
+          runtimeCaching: [
+            {
+              urlPattern: /\.(?:mp4|pdf)$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'media-cache',
+                expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              },
+            },
+          ],
         },
       }),
   ].filter(Boolean),

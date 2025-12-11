@@ -6,12 +6,14 @@ import SwipeAnimation from '../animations/SwipeAnimation';
 import Draw from '../Draw';
 import AnimatedEyes from '../AnimatedEyes';
 import { useTheme } from '../ThemeProvider';
+import { useLanguage } from '../LanguageProvider';
 
 const SectionOne = () => {
   const ref = useRef(null);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1], [0, 100]);
   const [animationStart, setAnimationStart] = useState(false); // State to control animation start
+  const { t } = useLanguage();
 
   const text = "Soulaiman Meskini";
   const letters = text.split("");
@@ -71,9 +73,9 @@ const SectionOne = () => {
           <div className="block md:hidden my-4 w-full flex justify-center">
             <AnimatedEyes />
           </div>
-          <h2 className="text-xl text-center">Portfolio Website</h2>
-          <p className="text-md text-center md:block hidden">Scroll down to see and read more</p>
-          <p className="text-md text-center md:hidden">Swipe to see and read more</p>
+          <h2 className="text-xl text-center">{t.hero.subtitle}</h2>
+          <p className="text-md text-center md:block hidden">{t.hero.scrollDown}</p>
+          <p className="text-md text-center md:hidden">{t.hero.swipeMore}</p>
           <div className="mt-5 w-12 h-12 mx-auto">
             <div className="md:block hidden">
               <MouseAnimation />
