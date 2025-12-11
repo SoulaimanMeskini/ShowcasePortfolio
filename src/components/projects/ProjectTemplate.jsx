@@ -76,6 +76,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
               <a
                 href={pdfUrl}
                 download
+                type="application/pdf"
                 className="inline-flex items-center text-[#1d1d1d] dark:text-white hover:text-[#6f02c6] dark:hover:text-[#6f02c6] transition-colors duration-300"
               >
                 <FaFileAlt className="text-xl md:text-2xl" />

@@ -40,6 +40,7 @@ const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponen
               <a
                 href={CV}
                 download
+                type="application/pdf"
                 className="flex items-center text-[#1d1d1d] dark:text-white underline mt-1 md:mt-3 transition-colors duration-300 hover:text-[#6f02c6] dark:hover:text-[#6f02c6]"
               >
                 <FaFileAlt className="mr-1" />
