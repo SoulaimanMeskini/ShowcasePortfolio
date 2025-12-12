@@ -4,13 +4,11 @@ import HeaderBubbleComponent from './HeaderBubble';
 import CustomLogo from '../svg/CustomLogo';
 import FollowingEyes from '../FollowingEyes';
 import useScrollVisibility from '../hooks/useScrollVisibility';
-import { useTheme } from '../ThemeProvider';
 import { useLanguage } from '../LanguageProvider';
 
 const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
   const scrollDirection = useScrollVisibility();
   const [isHovered, setIsHovered] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
@@ -31,15 +29,7 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
 
   return (
       <motion.div
-        className={`fixed top-0 z-[998] h-[80px] w-full flex items-center p-5 overflow-hidden transition-colors duration-300 ${
-          isLookbookPage 
-            ? theme === 'dark' 
-              ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md' 
-              : 'bg-transparent'
-            : theme === 'dark'
-              ? 'bg-[#1d1d1d] bg-opacity-50 backdrop-blur-md'
-              : 'bg-transparent'
-        }`}
+        className="fixed top-0 z-[998] h-[80px] w-full flex items-center p-5 overflow-hidden transition-colors duration-300 bg-transparent"
         initial={{ y: 0 }}
         animate={{ y: scrollDirection === 'down' && !isHovered ? '-100%' : '0%' }}
         transition={{ duration: 0.3 }}
@@ -71,25 +61,10 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
         <div className={`absolute ${showEyes ? 'right-5' : 'right-5 md:right-20'} top-1/2 transform -translate-y-1/2 z-[999] flex items-center gap-2`}>
           <button
             onClick={toggleLanguage}
-            className="px-3 py-2 rounded-full bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 text-[#1d1d1d] dark:text-white text-sm font-semibold border border-transparent hover:border-gray-300 dark:hover:border-gray-600"
+            className="px-3 py-2 rounded-full bg-transparent hover:bg-gray-200 transition-colors duration-300 text-[#1d1d1d] text-sm font-semibold border border-transparent hover:border-gray-300"
             aria-label="Toggle language"
           >
             {language === 'en' ? 'NL' : 'EN'}
-          </button>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 text-[#1d1d1d] dark:text-white"
-            aria-label="Toggle dark mode"
-          >
-            {theme === 'dark' ? (
-              <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
           </button>
         </div>
       </motion.div>

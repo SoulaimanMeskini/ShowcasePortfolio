@@ -196,7 +196,7 @@ export const translations = {
       titles: {
         one: 'Leuk je te ontmoeten',
         two: 'Bekijk mijn werk',
-        three: 'Momentopnames uit het leven',
+        three: 'Moment opnames uit het leven',
       },
       texts: {
         one: () => (

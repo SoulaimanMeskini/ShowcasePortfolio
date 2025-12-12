@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { useTheme } from "./ThemeProvider";
 import EyesLayout from "../assets/Eyeslayout.webp";
 import EyeBall from "../assets/Eyeball.webp";
 
@@ -10,7 +9,6 @@ import EyeBall from "../assets/Eyeball.webp";
  */
 const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
   const [mousePosition, setMousePosition] = useState({ x: "50%", y: "50%" });
-  const { theme } = useTheme();
 
   const handleMouseMove = useCallback((event) => {
     const x = (event.clientX * 100) / window.innerWidth;
@@ -27,9 +25,9 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
 
   const defaultWidtLayout = (250 * upscale) * scalingFactor;
   const defaultHightLayout = (130 * upscale) * scalingFactor;
-  const borderColor = theme === 'dark' ? '#1d1d1d' : '#f5f5f5';
-  // Use the same background color as the page (from CSS variable)
-  const backgroundColor = theme === 'dark' ? '#1d1d1d' : 'transparent';
+  // Match outline to the light site background
+  const borderColor = '#f5f5f5';
+  const backgroundColor = '#f5f5f5';
   const classNameStringLayout = `relative w-[${defaultWidtLayout}px] h-[${defaultHightLayout}px] flex justify-center items-center rounded-full overflow-hidden border-8 max-sm:w-[130px] max-sm:h-[70px]`;
 
   const defaultDiameterEyeball = (90 * upscale) * scalingFactor;
@@ -49,7 +47,7 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
               transform: `translate(-${mousePosition.x}, -${mousePosition.y})`,
               userSelect: "none",
               pointerEvents: "none",
-              filter: theme === 'dark' ? 'invert(1) brightness(2)' : 'none'
+              filter: 'none'
             }}
             draggable="false"
             alt="Eye Ball"
@@ -60,7 +58,7 @@ const FollowingEyes = ({ scalingFactor = 1, upscale = 1 }) => {
             style={{
               userSelect: "none",
               pointerEvents: "none",
-              filter: theme === 'dark' ? 'invert(1) brightness(2)' : 'none'
+              filter: 'none'
             }}
             draggable="false"
             alt="Eye Layout"

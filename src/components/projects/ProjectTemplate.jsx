@@ -33,8 +33,8 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
     <section className={`flex flex-col items-center justify-center w-full p-4 md:w-4/5 md:p-8 ${images.length > 0 ? 'md:flex-row' : 'md:flex-col'} ${images.length === 0 ? 'md:h-full' : 'md:h-auto'} min-h-full`}>
       <div className={`order-1 ${images.length > 0 ? 'md:order-2' : ''} flex justify-center ${centerText ? 'md:items-center' : 'md:items-start'} ${images.length > 0 ? 'w-full md:w-1/2' : 'w-full'} px-3 md:px-5 space-y-2 md:space-y-4 mt-4 md:mt-0 mb-6 md:mb-0`}>
         <div className={`max-w-lg ${centerText ? 'text-center' : ''}`}>
-          <h1 className="text-xl md:text-2xl mt-2 md:mt-4 text-[#1d1d1d] dark:text-white">{title}</h1>
-          <div className={`text-sm md:text-base ${centerText ? '' : 'text-justify'} mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d] dark:text-white`}>
+          <h1 className="text-xl md:text-2xl mt-2 md:mt-4 text-[#1d1d1d]">{title}</h1>
+          <div className={`text-sm md:text-base ${centerText ? '' : 'text-justify'} mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d]`}>
             <TextComponent />
           </div>
           <div className={`flex flex-col gap-2 mt-2 ${centerText ? 'items-center' : ''}`}>
@@ -43,7 +43,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
                 {link.startsWith('/') ? (
                   <Link
                     to={link}
-                    className="inline-flex items-center text-[#1d1d1d] dark:text-white hover:text-[#6f02c6] dark:hover:text-[#6f02c6] transition-colors duration-300"
+                    className="inline-flex items-center text-[#1d1d1d] hover:text-[#6f02c6] transition-colors duration-300"
                   >
                     <FaExternalLinkAlt className="text-xl md:text-2xl" />
                     <span className="ml-2 text-sm md:text-base font-semibold underline">{linkText}</span>
@@ -53,7 +53,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-[#1d1d1d] dark:text-white hover:text-[#6f02c6] dark:hover:text-[#6f02c6] transition-colors duration-300"
+                    className="inline-flex items-center text-[#1d1d1d] hover:text-[#6f02c6] transition-colors duration-300"
                   >
                     <FaExternalLinkAlt className="text-xl md:text-2xl" />
                     <span className="ml-2 text-sm md:text-base font-semibold underline">{linkText}</span>
@@ -66,7 +66,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
                 href={instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-[#1d1d1d] dark:text-white hover:text-[#6f02c6] dark:hover:text-[#6f02c6] transition-colors duration-300"
+                className="inline-flex items-center text-[#1d1d1d] hover:text-[#6f02c6] transition-colors duration-300"
               >
                 <FaInstagram className="text-2xl md:text-3xl" />
                 <span className="ml-2 text-sm md:text-base font-semibold">@rubymus.ic</span>
@@ -77,7 +77,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
                 href={pdfUrl}
                 download
                 type="application/pdf"
-                className="inline-flex items-center text-[#1d1d1d] dark:text-white hover:text-[#6f02c6] dark:hover:text-[#6f02c6] transition-colors duration-300"
+                className="inline-flex items-center text-[#1d1d1d] hover:text-[#6f02c6] transition-colors duration-300"
               >
                 <FaFileAlt className="text-xl md:text-2xl" />
                 <span className="ml-2 text-sm md:text-base font-semibold underline">Download Designs (PDF)</span>

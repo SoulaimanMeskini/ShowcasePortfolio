@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "../ThemeProvider";
 import { useLanguage } from "../LanguageProvider";
 
 const containerVariants = {
@@ -14,7 +13,7 @@ const navVariants = {
   visible: { opacity: 1, transition: { duration: 0.1, ease: "easeInOut", delay: 0.1 } }
 };
 
-const NavItem = ({ to, label, onClick, theme }) => (
+const NavItem = ({ to, label, onClick }) => (
   <motion.li
     className="mx-2 cursor-pointer"
     initial={{ opacity: 0 }}
@@ -24,7 +23,7 @@ const NavItem = ({ to, label, onClick, theme }) => (
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `nav-link ${theme === 'dark' ? 'text-[#1d1d1d]' : 'text-[#dadada]'} relative ${isActive ? "is-active" : ""}`
+        `nav-link text-[#dadada] relative ${isActive ? "is-active" : ""}`
       }
       onClick={onClick}
       style={{ fontSize: '1.1rem' }} 
@@ -37,7 +36,6 @@ const NavItem = ({ to, label, onClick, theme }) => (
 const Headerbubble = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const { theme } = useTheme();
   const { t } = useLanguage();
 
   const navItems = [
@@ -59,11 +57,7 @@ const Headerbubble = () => {
         variants={containerVariants}
         initial="closed"
         animate={menuOpen ? "open" : "closed"}
-        className={`h-[55px] w-[55px] flex justify-center items-center ${
-          theme === 'dark' 
-            ? 'bg-white border-white' 
-            : 'bg-[#1d1d1d] border-[#1d1d1d]'
-        } ${
+        className={`h-[55px] w-[55px] flex justify-center items-center bg-[#1d1d1d] border-[#1d1d1d] ${
           menuOpen ? 'cursor-default' : 'cursor-pointer'
         } transition-all duration-200 ease-in-out transform relative`}
         id="MenuChanger"
@@ -78,7 +72,7 @@ const Headerbubble = () => {
         >
           <svg width="100" height="100" viewBox="0 0 100 100">
             <path id="menuTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-            <text fontSize="14" fill={theme === 'dark' ? '#ffffff' : '#1d1d1d'}>
+            <text fontSize="14" fill="#ffffff">
               <textPath href="#menuTextPath" startOffset="50%" textAnchor="middle">
                 {menuOpen ? "CLOSE" : "MENU"}
               </textPath>
@@ -113,7 +107,7 @@ const Headerbubble = () => {
             >
               <ul className="m-0 p-0 flex flex-row items-center justify-center cursor-default rounded whitespace-nowrap list-none">
                 {navItems.map((item, index) => (
-                  <NavItem key={index + "navitem"} {...item} onClick={() => handleNavClick(item.to)} theme={theme} />
+                  <NavItem key={index + "navitem"} {...item} onClick={() => handleNavClick(item.to)} />
                 ))}
               </ul>
             </motion.nav>

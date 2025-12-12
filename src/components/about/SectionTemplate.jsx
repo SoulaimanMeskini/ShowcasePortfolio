@@ -31,8 +31,8 @@ const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponen
           <p className="text-gray-500 text-xs md:text-sm">{imgtext}</p>
         </div>
         <div className="flex flex-col justify-center items-center px-3 md:px-5 md:items-start space-y-2 md:space-y-4 w-full md:w-1/2 max-w-lg">
-          <h1 className="text-lg md:text-2xl mt-2 md:mt-4 text-[#1d1d1d] dark:text-white">{title}</h1>
-          <div className="text-sm md:text-base text-justify mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d] dark:text-white">
+          <h1 className="text-lg md:text-2xl mt-2 md:mt-4 text-[#1d1d1d]">{title}</h1>
+          <div className="text-sm md:text-base text-justify mt-2 md:mt-4 mb-2 md:mb-4 text-[#1d1d1d]">
             <TextComponent />
           </div>
           <div className="flex gap-2 md:gap-4">
@@ -41,7 +41,7 @@ const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponen
                 href={CV}
                 download
                 type="application/pdf"
-                className="flex items-center text-[#1d1d1d] dark:text-white underline mt-1 md:mt-3 transition-colors duration-300 hover:text-[#6f02c6] dark:hover:text-[#6f02c6]"
+                className="flex items-center text-[#1d1d1d] underline mt-1 md:mt-3 transition-colors duration-300 hover:text-[#6f02c6]"
               >
                 <FaFileAlt className="mr-1" />
                 <span className="font-bold text-sm md:text-lg">Resume</span>

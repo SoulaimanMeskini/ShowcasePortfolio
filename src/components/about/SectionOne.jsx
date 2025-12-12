@@ -5,7 +5,6 @@ import MouseAnimation from '../animations/MouseAnimation';
 import SwipeAnimation from '../animations/SwipeAnimation';
 import Draw from '../Draw';
 import AnimatedEyes from '../AnimatedEyes';
-import { useTheme } from '../ThemeProvider';
 import { useLanguage } from '../LanguageProvider';
 
 const SectionOne = () => {
