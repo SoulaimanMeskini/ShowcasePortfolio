@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaFileAlt } from 'react-icons/fa';
-import CV from '../../assets/Soulaiman CV 2026 NL.pdf';
+import CV from '../../assets/soulaimancv.pdf';
 import Socials from '../Socials';
 import { useLanguage } from '../LanguageProvider';
 
