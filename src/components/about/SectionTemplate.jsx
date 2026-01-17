@@ -1,13 +1,15 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaFileAlt } from 'react-icons/fa';
-import CV from '../../assets/soulaimancv.pdf';
+import CV from '../../assets/Soulaiman CV 2026 NL.pdf';
 import Socials from '../Socials';
+import { useLanguage } from '../LanguageProvider';
 
 const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponent, cv = false, socials = false }) => {
   const ref = useRef(null);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1], [0, 100]);
+  const { t } = useLanguage();
 
   return (
     <section ref={ref} className="h-screen w-full snap-start flex justify-center items-center p-4 md:p-8">
@@ -44,7 +46,7 @@ const SectionTemplate = ({ imgsource, imgalt, imgtext, title, text: TextComponen
                 className="flex items-center text-[#1d1d1d] underline mt-1 md:mt-3 transition-colors duration-300 hover:text-[#6f02c6]"
               >
                 <FaFileAlt className="mr-1" />
-                <span className="font-bold text-sm md:text-lg">Resume</span>
+                <span className="font-bold text-sm md:text-lg">{t.about.cvText}</span>
               </a>
             )}
             {socials && <Socials />}

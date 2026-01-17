@@ -72,7 +72,7 @@ const Headerbubble = () => {
         >
           <svg width="100" height="100" viewBox="0 0 100 100">
             <path id="menuTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-            <text fontSize="14" fill="#ffffff">
+            <text fontSize="14" fill="#1d1d1d">
               <textPath href="#menuTextPath" startOffset="50%" textAnchor="middle">
                 {menuOpen ? "CLOSE" : "MENU"}
               </textPath>

@@ -66,6 +66,7 @@ export const translations = {
         two: 'Grand Café Van Gogh - Romania',
         three: 'Obelisk - Vatican City',
       },
+      cvText: 'Resume',
     },
     projects: {
       titles: {
@@ -242,6 +243,7 @@ export const translations = {
         two: 'Grand Café Van Gogh - Roemenië',
         three: 'Obelisk - Vaticaanstad',
       },
+      cvText: 'CV',
     },
     projects: {
       titles: {
