@@ -1,0 +1,681 @@
+/* Fonts */
+
+@font-face {
+    src: url(fonts/PixelEmulator-xq08.ttf);
+    font-family: pixel;
+}
+
+@font-face {
+    src: url(fonts/Triforce.ttf);
+    font-family: titel;
+}
+
+/* Global styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: black;
+    font-family: pixel;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    user-select: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    box-sizing: border-box;
+}
+
+/* Cursor */
+.pointer {
+    pointer-events: none;
+    width: 18px;
+    height: 32px;
+    background-image: url("assets/sword.png");
+    z-index: 25;
+    position: absolute;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Start screen */
+img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    -webkit-user-drag: none;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+.scene1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "overlap";
+    z-index: 20;
+    width: 700px;
+    max-width: 90vw;
+    height: 572px;
+    max-height: 90vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    will-change: opacity;
+    contain: layout style paint;
+}
+
+.filter {
+    display: none; 
+    position: absolute; 
+    width: 100%; 
+    height: 115%; 
+    top: 0; 
+    left: 0; 
+    background-color: rgba(0, 0, 255, 0.7); 
+    z-index: 23;
+    will-change: opacity;
+    transform: translateZ(0);
+}
+
+.RemoveBlock, .AnimateShow {
+    animation: fadeOut 3s linear 0s forwards;
+    will-change: opacity;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.starting h3 {
+    margin: 0;
+    top: 30%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 3.5em;
+    color: #873f00;
+    text-shadow: 0px 0px 0 rgb(77, 5, 0), -1px 1px 0 rgb(68, -4, 0),
+                 -2px 2px 0 rgb(60, -12, 0), -3px 3px 0 rgb(52, -20, 0),
+                 -4px 4px 0 rgb(43, -29, 0), -5px 5px 0 rgb(35, -37, 0),
+                 -6px 6px 0 rgb(27, -45, 0), -7px 7px 6px rgba(0, 0, 0, 0),
+                 -7px 7px 1px rgba(0, 0, 0, 0.5), 0px 0px 6px rgba(0, 0, 0, .2);
+    font-family: titel;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+button {
+    grid-area: overlap;
+    border: none;
+    margin: 0;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 1.3em;
+    font-family: pixel;
+    color: transparent;
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(255, 255, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: animate 0.9s linear infinite;
+    background-size: 1000%;
+    z-index: 22;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0% 100%;
+    }
+    50% {
+        background-position: 100% 0%;
+    }
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+/* Scroll Container */
+.scroll-container {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateY(150vh);
+    width: 100%;
+    z-index: 21;
+    opacity: 0;
+    will-change: transform;
+    transform-origin: center center;
+}
+
+.scroll-container.scrolling {
+    opacity: 1;
+    animation: continuousScroll 60s linear forwards;
+}
+
+.scroll-container.scrolling .scene4 {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Continuous scroll animation with pauses */
+@keyframes continuousScroll {
+    /* Scroll Scene 2 into exact middle (0-8s) */
+    0% {
+        transform: translateX(-50%) translateY(150vh);
+    }
+    13.33% {
+        transform: translateX(-50%) translateY(21.5vh);
+    }
+    /* Pause at Scene 2 for reading (8-17s = 9s pause, reduced by 3s) - exactly centered */
+    13.33% {
+        transform: translateX(-50%) translateY(21.5vh);
+    }
+    28.33% {
+        transform: translateX(-50%) translateY(21.5vh);
+    }
+    /* Scroll Scene 3 through continuously (17-45s) - scroll to show all treasures */
+    28.33% {
+        transform: translateX(-50%) translateY(21.5vh);
+    }
+    75% {
+        transform: translateX(-50%) translateY(-578.5vh);
+    }
+    /* Scroll Scene 4 into middle (45-50s) - Scene 4 is at bottom of Scene 3, scroll to center it */
+    75% {
+        transform: translateX(-50%) translateY(-578.5vh);
+    }
+    83.33% {
+        transform: translateX(-50%) translateY(-728.5vh);
+    }
+    /* Stop at Scene 4 for reading (50-60s = 10s pause) - Scene 4 centered */
+    83.33% {
+        transform: translateX(-50%) translateY(-728.5vh);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-728.5vh);
+    }
+}
+
+/* Scene 2 */
+.scene2 {
+    background-image: url("assets/introtext.png");
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 700px;
+    max-width: 90vw;
+    height: 572px;
+    max-height: 90vh;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
+}
+
+
+.scene2 h3 {
+    width: 70%;
+    max-width: 500px;
+    color: red;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    transform: translate(-50%, 0);
+    z-index: 1;
+}
+
+.scene2 h2 {
+    color: whitesmoke;
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 520px;
+    max-width: 75%;
+    font-size: 16px;
+    text-align: center;
+    z-index: 1;
+}
+
+.scene2 h2 .justified-text {
+    text-align: justify;
+    text-align-last: justify;
+    display: inline-block;
+    width: 100%;
+    line-height: 1.8;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+}
+
+.scene2 h2 .left-align {
+    text-align: left;
+    display: block;
+    width: 100%;
+    line-height: 1.8;
+    letter-spacing: 3px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+
+.scene2 h2 .center-align {
+    text-align: center;
+    display: block;
+    width: 100%;
+    line-height: 1.8;
+    letter-spacing: 3px;
+    margin-top: 6px;
+}
+
+/* Scene 3 */
+.scene3 {
+    position: relative;
+    width: 100%;
+    max-width: 90vw;
+    margin: 0 auto;
+    margin-bottom: 100vh;
+    contain: layout style paint;
+}
+
+.scene3 .treasures-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.scene3 .vine {
+    height: auto;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.scene3 .vine.left-vine {
+    order: 1;
+}
+
+.scene3 h2 {
+    order: 2;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 6px;
+    font-size: 25px;
+    color: white;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.scene3 .vine.right-vine {
+    order: 3;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for larger screens */
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.grid-item {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.grid-item img {
+    width: 30px;
+    height: 30px;
+}
+
+.grid-item p {
+    margin-top: 15px;
+    font-size: 18px;
+    color: white;
+    font-family: pixel;
+    letter-spacing: 3px;
+}
+
+/* Centered Triforce */
+.grid-last {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; 
+    text-align: center;
+}
+
+.grid-last img {
+    width: 50px; 
+    height: 50px;
+}
+
+.grid-last p {
+    margin-top: 40px;
+    font-size: 18px;
+    color: white;
+    font-family: pixel;
+    letter-spacing: 3px;
+}
+
+/* Media query for phones */
+@media only screen and (max-width: 768px) {
+
+    .scene3 .treasures-wrapper {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center; /* Center items */
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr; /* Single column layout for mobile */
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .grid-item {
+        margin-top: 50px;
+    }
+
+    .grid-item img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .grid-item p {
+        font-size: 14px;
+    }
+
+    .grid-last img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Scene 4 */
+.scene4 {
+    position: relative;
+    width: 100%;
+    max-width: 90vw;
+    margin: 100vh auto 0;
+    contain: layout style paint;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    z-index: 10;
+    opacity: 1;
+    visibility: visible;
+}
+
+.scene4 .centered-content {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.scene4 img {
+    width: 400px;
+    max-width: 90%;
+    height: auto;
+    display: block;
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+.scene4 h2 {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: pixel;
+    font-size: 18px;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    text-shadow: 2px 2px 5px black, 2px 2px 10px black, 0 0 20px rgba(0,0,0,0.8);
+    width: 75%;
+    max-width: 300px;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 1;
+    visibility: visible;
+    padding: 0 15px;
+    box-sizing: border-box;
+    white-space: normal;
+}
+
+
+/* Media Queries for Responsiveness */
+@media only screen and (max-width: 768px) {
+    .scroll-container.scrolling {
+        animation: continuousScrollMobile 60s linear forwards;
+    }
+    
+    @keyframes continuousScrollMobile {
+        /* Scroll Scene 2 into exact middle */
+        0% {
+            transform: translateX(-50%) translateY(150vh);
+        }
+        13.33% {
+            transform: translateX(-50%) translateY(21.5vh);
+        }
+        /* Pause at Scene 2 for reading (reduced by 3s) - exactly centered */
+        13.33% {
+            transform: translateX(-50%) translateY(21.5vh);
+        }
+        28.33% {
+            transform: translateX(-50%) translateY(21.5vh);
+        }
+        /* Scroll Scene 3 through continuously - scroll to show all treasures */
+        28.33% {
+            transform: translateX(-50%) translateY(21.5vh);
+        }
+        75% {
+            transform: translateX(-50%) translateY(-578.5vh);
+        }
+        /* Scroll Scene 4 into middle - Scene 4 is at bottom of Scene 3, scroll to center it */
+        75% {
+            transform: translateX(-50%) translateY(-578.5vh);
+        }
+        83.33% {
+            transform: translateX(-50%) translateY(-728.5vh);
+        }
+        /* Stop at Scene 4 for reading - Scene 4 centered */
+        83.33% {
+            transform: translateX(-50%) translateY(-728.5vh);
+        }
+        100% {
+            transform: translateX(-50%) translateY(-728.5vh);
+        }
+    }
+    
+    .scene1, .scene3, .scene4 {
+        width: 100%;
+        max-width: 95vw;
+        height: auto;
+        max-height: 95vh;
+    }
+    
+    .scene2 { 
+        width: 100%;
+        max-width: 95vw;
+        height: auto;
+        max-height: 95vh;
+    }
+    
+    .starting h3 {
+        font-size: clamp(1.5em, 5vw, 2em);
+        top: 25%;
+        left: 50%;
+    }
+
+    .filter {
+        height: 100%;
+    }
+
+    button {
+        font-size: clamp(0.7em, 2.5vw, 0.8em);
+        padding: 5px 10px;
+    }
+
+    .scene2 h2 {
+        font-size: clamp(10px, 2vw, 14px);
+        width: 75%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .scene2 h3 {
+        font-size: clamp(0.7rem, 2vw, 0.9rem);
+        top: 8%;
+    }
+
+    .scene3 h2 {
+        font-size: clamp(16px, 4vw, 20px);
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .grid-item {
+        margin-top: 30px;
+    }
+
+    .grid-item img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .grid-item p {
+        font-size: clamp(12px, 3vw, 14px);
+    }
+
+    .grid-last img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .scene4 img {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .scene4 h2 {
+        font-size: clamp(14px, 3.5vw, 18px);
+        left: 50%;
+        width: 90%;
+    }
+}
+
+/* Tablet responsiveness */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .scene1, .scene2 {
+        width: 80vw;
+        max-width: 700px;
+        height: auto;
+        aspect-ratio: 700 / 572;
+    }
+    
+    .starting h3 {
+        font-size: clamp(2.5em, 5vw, 3.5em);
+    }
+    
+    button {
+        font-size: clamp(1em, 2vw, 1.3em);
+    }
+    
+    .scene2 h2 {
+        font-size: clamp(14px, 2vw, 20px);
+    }
+    
+    .scene3 h2 {
+        font-size: clamp(20px, 3vw, 25px);
+    }
+}
+
+/* Small mobile devices */
+@media only screen and (max-width: 480px) {
+    .scene1, .scene2, .scene3, .scene4 {
+        width: 98vw;
+        max-height: 98vh;
+    }
+    
+    .starting h3 {
+        font-size: 1.2em;
+        top: 20%;
+    }
+    
+    button {
+        font-size: 0.6em;
+        top: 60%;
+    }
+    
+    .scene2 h2 {
+        font-size: 7px;
+        width: 90%;
+        top: 3%;
+    }
+    
+    .scene2 h3 {
+        font-size: 10px;
+    }
+    
+    .grid-item {
+        margin-top: 20px;
+    }
+    
+    .grid-item img {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .grid-item p {
+        font-size: 11px;
+    }
+    
+    .scene4 img {
+        width: 70%;
+    }
+    
+    .scene4 h2 {
+        font-size: 12px;
+        top: 30%;
+    }
+}
+

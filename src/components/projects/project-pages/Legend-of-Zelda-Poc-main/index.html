@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Copy of Zelda Nes Intro by Soulaiman Meskini." />
+    <meta name="author" content="Soulaiman Meskini" />
+    <title>Soulaiman Meskini - ZELDA INTRO</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="loader"></div>
+    <div class="pointer"></div>
+
+    <!-- Start Page -->
+    <div class="section-1">
+        <div class="animatie">
+            <p class="text-uppercase"><span class="typed-text"></span><span class="cursor">&nbsp;</span></p>
+        </div>
+
+        <div class="oldMan-container">
+            <img class="fire fire-left" src="assets/fire.gif" alt="Fire" style="display: none;">
+            <img class="oldMan" src="assets/old man.png" alt="Old Man">
+            <img class="fire fire-right" src="assets/fire.gif" alt="Fire" style="display: none;">
+        </div>
+        <div class="forum">
+            <form id="form" class="form">
+                <div>
+                    <label for="TRAVELER">TRAVELER</label>
+                    <input maxlength="10" type="text" value="LINK" id="TRAVELER" name="TRAVELER" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="ZELDA">PRINCESS</label>
+                    <input maxlength="10" type="text" value="ZELDA" id="ZELDA" name="ZELDA" placeholder="Enter the princess's name"><br>
+                </div>
+                <div>
+                    <label for="GANNON">PRINCE DARKNESS</label>
+                    <input maxlength="10" type="text" value="GANNON" id="GANNON" name="GANNON" placeholder="Enter the prince of darkness's name">
+                </div>
+                <br>
+                <div>
+                    <label for="music">Hear Music:</label>
+                    <input type="checkbox" id="music" name="music" checked>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit">START JOURNEY</button>
+                    <button type="reset">RESET NAMES</button>
+                </div>
+            </form>
+            <br>
+        </div>
+        <div class="bottom-left">
+            <p>*THIS WEBSITE IS MEANT FOR EDUCATIONAL PURPOSES*</p>
+            <a href="https://www.youtube.com/watch?v=uyMKWJ5e1kg" target="_blank">Watch the original Intro on Youtube</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bottom-right">
+        <p>Made by Soulaiman</p>
+        <a href="https://soulaimanmeskini.com" target="_blank">soulaimanmeskini.com</a>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="java/scripts.js"></script>
+    <script src="java/Textanimation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve and set the music preference on page load
+            const musicCheckbox = document.getElementById("music");
+            const musicPreference = localStorage.getItem('MUSIC');
+            // If no preference exists, default to checked (true)
+            if (musicPreference === null) {
+                musicCheckbox.checked = true;
+                localStorage.setItem('MUSIC', 'true');
+            } else {
+                musicCheckbox.checked = musicPreference === 'true';
+            }
+            
+            // Update music preference when checkbox changes
+            musicCheckbox.addEventListener('change', function() {
+                localStorage.setItem('MUSIC', this.checked ? 'true' : 'false');
+            });
+
+            // Add event listener to the form submit button to store user preferences
+            const form = document.querySelector("#form");
+            form.addEventListener("submit", function(event) {
+                // Stop form submission
+                event.preventDefault();
+
+                const TRAVELER = document.getElementById("TRAVELER").value;
+                const ZELDA = document.getElementById("ZELDA").value;
+                const GANNON = document.getElementById("GANNON").value;
+                const music = document.getElementById("music").checked;
+
+                console.log(TRAVELER + " " + ZELDA + " " + GANNON + " Music: " + music);
+
+                // Store the values in localStorage
+                localStorage.setItem("TRAVELER", TRAVELER);
+                localStorage.setItem("ZELDA", ZELDA);
+                localStorage.setItem("GANNON", GANNON);
+                localStorage.setItem("MUSIC", music); // Store the checkbox state in localStorage
+
+                // Redirect to results.html
+                window.location.href = "results.html";
+            });
+
+            // Add event listener to the reset button
+            document.querySelector('button[type="reset"]').addEventListener('click', () => {
+                localStorage.removeItem("MUSIC"); // Remove the music preference when reset
+            });
+
+            // Add click event listener to the old man
+            const oldMan = document.querySelector('.oldMan');
+            const fireLeft = document.querySelector('.fire-left');
+            const fireRight = document.querySelector('.fire-right');
+            const typedTextSpan = document.querySelector('.typed-text');
+            const cursorSpan = document.querySelector('.cursor');
+            let hasClicked = false;
+
+            if (oldMan) {
+                oldMan.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (!hasClicked) {
+                        hasClicked = true;
+                        
+                        // Show fire images
+                        if (fireLeft) fireLeft.style.display = 'block';
+                        if (fireRight) fireRight.style.display = 'block';
+                        
+                        // Stop the original typing animation by clearing the interval
+                        // Clear existing text and type new message
+                        if (typedTextSpan) {
+                            typedTextSpan.textContent = '';
+                        }
+                        if (cursorSpan) {
+                            cursorSpan.classList.add("typing");
+                        }
+                        
+                        const newText = "It's dangerous to go alone! Take this.";
+                        let charIndex = 0;
+                        
+                        function typeNewText() {
+                            if (charIndex < newText.length && typedTextSpan) {
+                                typedTextSpan.textContent += newText.charAt(charIndex);
+                                charIndex++;
+                                setTimeout(typeNewText, 70);
+                            } else {
+                                if (cursorSpan) {
+                                    cursorSpan.classList.remove("typing");
+                                }
+                            }
+                        }
+                        
+                        typeNewText();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

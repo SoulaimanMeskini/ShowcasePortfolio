@@ -6,7 +6,7 @@ import FollowingEyes from '../FollowingEyes';
 import useScrollVisibility from '../hooks/useScrollVisibility';
 import { useLanguage } from '../LanguageProvider';
 
-const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
+const Header = ({ showLogo, isLookbookPage, showEyes = false, whiteBackground = false, whiteElements = false }) => {
   const scrollDirection = useScrollVisibility();
   const [isHovered, setIsHovered] = useState(false);
   const { language, toggleLanguage } = useLanguage();
@@ -29,7 +29,9 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
 
   return (
       <motion.div
-        className="fixed top-0 z-[998] h-[80px] w-full flex items-center p-5 overflow-hidden transition-colors duration-300 bg-transparent"
+        className={`fixed top-0 z-[998] h-[80px] w-full flex items-center p-5 overflow-hidden transition-colors duration-300 ${
+          whiteBackground ? 'bg-white' : 'bg-transparent'
+        }`}
         initial={{ y: 0 }}
         animate={{ y: scrollDirection === 'down' && !isHovered ? '-100%' : '0%' }}
         transition={{ duration: 0.3 }}
@@ -43,13 +45,13 @@ const Header = ({ showLogo, isLookbookPage, showEyes = false }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <CustomLogo />
+                <CustomLogo isWhite={whiteElements} />
               </motion.div>
             )}
           </AnimatePresence>
         </div>
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <HeaderBubbleComponent />
+          <HeaderBubbleComponent isWhite={whiteElements} />
         </div>
         {showEyes && (
           <div className="absolute right-20 md:right-24 hidden md:block">

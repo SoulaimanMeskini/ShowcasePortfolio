@@ -33,7 +33,7 @@ const NavItem = ({ to, label, onClick }) => (
   </motion.li>
 );
 
-const Headerbubble = () => {
+const Headerbubble = ({ isWhite = false }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useLanguage();
@@ -57,7 +57,9 @@ const Headerbubble = () => {
         variants={containerVariants}
         initial="closed"
         animate={menuOpen ? "open" : "closed"}
-        className={`h-[55px] w-[55px] flex justify-center items-center bg-[#1d1d1d] border-[#1d1d1d] ${
+        className={`h-[55px] w-[55px] flex justify-center items-center ${
+          isWhite ? 'bg-white border-white' : 'bg-[#1d1d1d] border-[#1d1d1d]'
+        } ${
           menuOpen ? 'cursor-default' : 'cursor-pointer'
         } transition-all duration-200 ease-in-out transform relative`}
         id="MenuChanger"
@@ -72,7 +74,7 @@ const Headerbubble = () => {
         >
           <svg width="100" height="100" viewBox="0 0 100 100">
             <path id="menuTextPath" fill="none" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-            <text fontSize="14" fill="#1d1d1d">
+            <text fontSize="14" fill={isWhite ? "#ffffff" : "#1d1d1d"}>
               <textPath href="#menuTextPath" startOffset="50%" textAnchor="middle">
                 {menuOpen ? "CLOSE" : "MENU"}
               </textPath>

@@ -76,6 +76,7 @@ export const translations = {
         rubyMus: 'Ruby Mus',
         souraiko: 'Souraiko',
         zelda: 'The Legend of Zelda',
+        minecraftButtonGenerator: 'Minecraft Button Generator',
         displini: 'Displini',
         lookbook: 'Lookbook',
       },
@@ -143,22 +144,15 @@ export const translations = {
             In this project, I&apos;ve worked on recreating the iconic intro scene of the original{' '}
             <mark>Legend of Zelda (NES)</mark>, but with a custom twist where you can enter your own name, and it
             will display &quot;The Legend of [Your Name].&quot; I meticulously recreated all the assets and coded
-            the entire experience using <mark>HTML, CSS, and JavaScript</mark>. Click on{' '}
-            <a
-              href="https://legend-of-zelda-poc.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: 'inherit',
-                textDecoration: 'underline',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = '#6f02c6')}
-              onMouseOut={(e) => (e.currentTarget.style.color = 'inherit')}
-            >
-              Legend of Zelda (NES)
-            </a>{' '}
-            to view the project and experience the custom intro for yourself.
+            the entire experience using <mark>HTML, CSS, and JavaScript</mark>. Open the project page to experience
+            the custom intro directly inside this portfolio.
+          </p>
+        ),
+        minecraftButtonGenerator: () => (
+          <p>
+            This tool recreates the classic <mark>Minecraft style button</mark> so you can generate your own custom
+            button text quickly. I built it with HTML, CSS, and JavaScript as a fun UI experiment and packaged it as
+            a lightweight interactive web tool.
           </p>
         ),
         displini: () => (
@@ -253,6 +247,7 @@ export const translations = {
         rubyMus: 'Ruby Mus',
         souraiko: 'Souraiko',
         zelda: 'The Legend of Zelda',
+        minecraftButtonGenerator: 'Minecraft Button Generator',
         displini: 'Displini',
         lookbook: 'Lookbook',
       },
@@ -315,22 +310,14 @@ export const translations = {
             In dit project recreëerde ik de iconische intro van de originele{' '}
             <mark>Legend of Zelda (NES)</mark>, maar dan met een twist: je eigen naam verschijnt in &quot;The
             Legend of [Your Name].&quot; Ik maakte alle assets na en codeerde alles met <mark>HTML, CSS en
-            JavaScript</mark>. Klik op{' '}
-            <a
-              href="https://legend-of-zelda-poc.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: 'inherit',
-                textDecoration: 'underline',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = '#6f02c6')}
-              onMouseOut={(e) => (e.currentTarget.style.color = 'inherit')}
-            >
-              Legend of Zelda (NES)
-            </a>{' '}
-            om het project te bekijken en de custom intro te ervaren.
+            JavaScript</mark>. Open de projectpagina om deze custom intro direct binnen mijn portfolio te bekijken.
+          </p>
+        ),
+        minecraftButtonGenerator: () => (
+          <p>
+            Deze tool bootst de klassieke <mark>Minecraft-knopstijl</mark> na, zodat je eenvoudig je eigen knoptekst
+            kunt genereren. Ik bouwde dit met HTML, CSS en JavaScript als een speels UI-experiment in een lichte,
+            interactieve webtool.
           </p>
         ),
         displini: () => (

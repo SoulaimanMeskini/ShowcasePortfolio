@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Minecraft Button Image Generator</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="app-shell">
+		<header class="app-header">
+			<h1 class="app-title">Minecraft button generator</h1>
+			<p class="app-sub">Type your label, preview the blocky button, then download a PNG.</p>
+		</header>
+
+		<main class="app-grid">
+			<section class="panel panel-form" aria-labelledby="label-text">
+				<h2 id="label-text" class="panel-heading">Button text</h2>
+				<form class="form" onsubmit="return false;">
+					<label class="field">
+						<span class="field-label">Label</span>
+						<input
+							type="text"
+							id="button-text"
+							class="field-input"
+							maxlength="48"
+							placeholder="PLAY"
+							autocomplete="off"
+							value="TEST"
+						/>
+					</label>
+					<label class="field field-checkbox">
+						<input type="checkbox" id="fit-text" class="field-check" />
+						<span class="field-check-label">Fit to text</span>
+					</label>
+					<label class="field field-checkbox">
+						<input type="checkbox" id="export-hover" class="field-check" />
+						<span class="field-check-label">Include hover style in PNG</span>
+					</label>
+					<p class="field-hint">
+						Up to 48 characters. Full width uses the classic menu bar size; Fit to text sizes the button to the label (within the preview width).
+					</p>
+				</form>
+			</section>
+
+			<section class="panel panel-preview" aria-labelledby="label-preview">
+				<h2 id="label-preview" class="panel-heading">Preview</h2>
+				<div class="preview-toolbar">
+					<p class="size-estimate" id="size-estimate" aria-live="polite"></p>
+					<button type="button" id="download-png" class="download-btn">Download PNG</button>
+				</div>
+				<div class="preview-surface">
+					<div id="capture-target" class="capture-target">
+						<div id="preview-button" class="mc-button full">
+							<span class="title" id="preview-title">TEST</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="panel panel-code" aria-labelledby="label-code">
+				<h2 id="label-code" class="panel-heading">Export code</h2>
+				<p class="code-sub">Copy ready snippets for your own project.</p>
+				<div class="code-grid">
+					<div class="code-card code-card--collapsed">
+						<div class="code-head">
+							<h3>HTML</h3>
+							<div class="code-actions">
+								<button type="button" class="toggle-btn" data-toggle-target="html-output">Expand</button>
+								<button type="button" class="copy-btn" data-copy-target="html-output">Copy HTML</button>
+							</div>
+						</div>
+						<pre id="html-output" class="code-output"></pre>
+					</div>
+					<div class="code-card code-card--collapsed">
+						<div class="code-head">
+							<h3>CSS</h3>
+							<div class="code-actions">
+								<button type="button" class="toggle-btn" data-toggle-target="css-output">Expand</button>
+								<button type="button" class="copy-btn" data-copy-target="css-output">Copy CSS</button>
+							</div>
+						</div>
+						<pre id="css-output" class="code-output"></pre>
+					</div>
+					<div class="code-card code-card--collapsed">
+						<div class="code-head">
+							<h3>JavaScript</h3>
+							<div class="code-actions">
+								<button type="button" class="toggle-btn" data-toggle-target="js-output">Expand</button>
+								<button type="button" class="copy-btn" data-copy-target="js-output">Copy JS</button>
+							</div>
+						</div>
+						<pre id="js-output" class="code-output"></pre>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<section class="credits-panel" aria-labelledby="credits-heading">
+			<h2 id="credits-heading" class="panel-heading">Credits</h2>
+			<p>
+				Based on Minecraft-style menu/button inspiration from
+				<a href="https://codepen.io/joexmdq/pen/EOMLzg" target="_blank" rel="noopener noreferrer">Joex on CodePen</a>.
+			</p>
+			<p>
+				Alex Gabites yourself from here: Minecraft Webfont and Colors
+				(<a href="https://github.com/South-Paw/Minecraft-Webfont-and-Colors/tree/master/font" target="_blank" rel="noopener noreferrer">https://github.com/South-Paw/Minecraft-Webfont-and-Colors/tree/master/font</a>)
+			</p>
+			<p>Custom font from Ace_Monkey_Ilium Minecraft Starting Screen pen.</p>
+		</section>
+	</div>
+
+	<a
+		class="creator-badge"
+		href="https://www.youtube.com/@Soelliiiiiiii"
+		target="_blank"
+		rel="noopener noreferrer"
+		aria-label="Creator on YouTube: @Soelliiiiiiii"
+	>
+		<span class="creator-badge-prefix">creator :</span>
+		<span class="creator-badge-handle">@Soelliiiiiiii</span>
+	</a>
+
+	<script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+	<script src="app.js" defer></script>
+</body>
+</html>

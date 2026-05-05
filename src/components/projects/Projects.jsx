@@ -14,6 +14,7 @@ import SouraikoImage3 from '../../assets/project/Souraiko3.webp';
 import SouraikoImage4 from '../../assets/project/Souraiko4.webp';
 import ZeldaImage1 from '../../assets/project/zelda1.webp';
 import ZeldaImage2 from '../../assets/project/zelda2.webp';
+import MinecraftButtonImage1 from '../../assets/project/minecraft-button-showcase.png';
 import VentilatieImage1 from '../../assets/project/ventilatieland1.webp';
 import VentilatieImage2 from '../../assets/project/ventilatieland2.webp';
 import VentilatieImage3 from '../../assets/project/ventilatieland3.webp';
@@ -49,6 +50,9 @@ const ZeldaImages = [
   { src: ZeldaImage1, alt: 'Zelda Image 1' },
   { src: ZeldaImage2, alt: 'Zelda Image 2' }
 ];
+const MinecraftButtonImages = [
+  { src: MinecraftButtonImage1, alt: 'Minecraft Button Generator Preview', noRounded: true }
+];
 
 const DispliniImages = [
   { src: DispliniImage1, alt: 'Displini Image 1' },
@@ -57,7 +61,7 @@ const DispliniImages = [
 ];
 
 const Projects = ({ scrollRef }) => {
-  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation()];
+  const controlsArray = [useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation(), useAnimation()];
   const { t } = useLanguage();
 
   useLayoutEffect(() => {
@@ -90,7 +94,8 @@ const Projects = ({ scrollRef }) => {
   }, [controlsArray, scrollRef]);
 
   const projectData = [
-    { images: ZeldaImages, title: t.projects.titles.zelda, text: t.projects.texts.zelda, link: "https://legend-of-zelda-poc.vercel.app/", linkText: t.projects.linkText.viewProject },
+    { images: ZeldaImages, title: t.projects.titles.zelda, text: t.projects.texts.zelda, link: "/projects/legend-of-zelda", linkText: t.projects.linkText.viewProject },
+    { images: MinecraftButtonImages, title: t.projects.titles.minecraftButtonGenerator, text: t.projects.texts.minecraftButtonGenerator, link: "/projects/minecraft-button-generator", linkText: t.projects.linkText.viewProject, imgStyles: { width: '108%' } },
     { images: DispliniImages, title: t.projects.titles.displini, text: t.projects.texts.displini, link: "https://displini.com/", linkText: t.projects.linkText.visitDisplini },
     { images: SouraikoImages, title: t.projects.titles.souraiko, text: t.projects.texts.souraiko },
     { images: CustomMediaImages, title: t.projects.titles.customMedia, text: t.projects.texts.customMedia, link: "https://goconnect.jp/author/soulaiman-meskini/", linkText: t.projects.linkText.visitArticles, pdfUrl: "/custommedia.pdf" },
@@ -117,8 +122,8 @@ const Projects = ({ scrollRef }) => {
             images={data.images}
             title={data.title}
             text={data.text}
-            imgStyles={{ width: '90%' }}
-            videoStyles={{ width: '90%', height: 'auto' }}
+            imgStyles={data.imgStyles || { width: '90%' }}
+            videoStyles={data.videoStyles || { width: '90%', height: 'auto' }}
             instagram={data.instagram}
             link={data.link}
             linkText={data.linkText}

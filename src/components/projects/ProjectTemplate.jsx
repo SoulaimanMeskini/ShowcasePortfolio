@@ -129,7 +129,7 @@ const ProjectTemplate = ({ images = [], title, text: TextComponent, imgStyles = 
                     <img
                       src={img.src}
                       alt={img.alt}
-                      className={`rounded-2xl object-cover transition-transform hover:scale-105 ${shouldCenter ? 'w-full md:w-1/6 max-w-[200px] mx-auto' : isThirdImageOfThree ? 'w-1/2' : 'w-full'}`}
+                      className={`${img.noRounded ? '' : 'rounded-2xl'} object-cover transition-transform hover:scale-105 ${shouldCenter ? 'w-full md:w-1/6 max-w-[200px] mx-auto' : isThirdImageOfThree ? 'w-1/2' : 'w-full'}`}
                       style={imgStyles}
                       draggable="false"
                       loading="lazy"
