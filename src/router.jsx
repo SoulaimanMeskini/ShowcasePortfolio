@@ -8,6 +8,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import UploadPage from "./pages/UploadPage";
 import DrawPage from "./pages/DrawPage";
 import ProjectShowcasePage from "./pages/ProjectShowcasePage";
+import CalculatorHiddenPage from "./pages/CalculatorHiddenPage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "projects/:projectSlug", element: <ProjectShowcasePage /> },
       { path: "upload", element: <UploadPage /> },
       { path: "draw", element: <DrawPage /> },
+      { path: "calculator", element: <CalculatorHiddenPage /> },
     ],
   },
 ]);
