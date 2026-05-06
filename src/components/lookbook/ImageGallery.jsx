@@ -11,34 +11,57 @@ const ImageGallery = () => {
   const [error, setError] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'images'));
-        const imageUrls = await Promise.all(
-          querySnapshot.docs.map(async (doc) => {
-            const { path } = doc.data();
-            if (path.endsWith('.webp') || path.endsWith('.gif')) {
-              try {
-                const url = await getDownloadURL(ref(storage, path));
-                return { id: doc.id, url };
-              } catch (error) {
-                console.error(`Error getting download URL for ${path}:`, error);
-                return null;
-              }
-            } else {
-              return null;
-            }
-          })
-        );
-        setImages(imageUrls.filter((image) => image !== null));
-      } catch (error) {
-        console.error('Error fetching images from Firestore:', error);
-        setError('Error fetching images. Please try again later.');
-      }
-    };
+  const mapDocsToImages = async (docs) => {
+    const imageUrls = await Promise.all(
+      docs.map(async (doc) => {
+        const { path, url } = doc.data();
 
+        if (path) {
+          const lowerPath = path.toLowerCase();
+          if (
+            lowerPath.endsWith('.webp') ||
+            lowerPath.endsWith('.gif') ||
+            lowerPath.endsWith('.png') ||
+            lowerPath.endsWith('.jpg') ||
+            lowerPath.endsWith('.jpeg')
+          ) {
+            try {
+              const freshUrl = await getDownloadURL(ref(storage, path));
+              return { id: doc.id, url: freshUrl };
+            } catch (storageError) {
+              console.error(`Error getting download URL for ${path}:`, storageError);
+            }
+          }
+        }
+
+        // Fallback for legacy docs that only have direct URL stored.
+        if (url) {
+          return { id: doc.id, url };
+        }
+
+        return null;
+      })
+    );
+    return imageUrls.filter((image) => image !== null);
+  };
+
+  const fetchImages = async () => {
+    setError('');
+
+    try {
+      const querySnapshot = await getDocs(collection(db, 'images'));
+      const mappedImages = await mapDocsToImages(querySnapshot.docs);
+
+      setImages(mappedImages);
+    } catch (fetchError) {
+      console.error('Error fetching images from Firestore:', fetchError);
+      setError('Error fetching images. Storage quota may be exceeded.');
+    }
+  };
+
+  useEffect(() => {
     fetchImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -72,6 +95,7 @@ const ImageGallery = () => {
                 alt={`Gallery illustration ${image.id}`}
                 style={{ width: '100%', height: 'auto' }}
                 loading="lazy"
+                onError={() => setImages((prev) => prev.filter((img) => img.id !== image.id))}
               />
             </div>
           ))}

@@ -17,7 +17,7 @@ const LookbookPage = () => {
       <div className="w-full absolute top-0" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)' }}>
       </div>
       <Lookbook />
-      <Footer />
+      <Footer dark={true} />
       <ScrollToTopButton /> 
     </motion.div>
   );

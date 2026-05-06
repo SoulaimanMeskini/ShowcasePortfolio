@@ -130,7 +130,7 @@ const AboutMe = ({ scrollRef }) => {
         <motion.section
           key={sectionData.id}
           id={sectionData.id}
-          className="h-full w-full md:snap-center"
+          className="relative h-full w-full md:snap-center"
           initial={{ opacity: 0 }}
           animate={controlsArray[index]}
           transition={{ duration: 0.7 }}
@@ -149,9 +149,14 @@ const AboutMe = ({ scrollRef }) => {
             />
           )}
           {index === aboutSectionsData.length - 1 && (
-            <div className="pb-1 md:hidden">
-              <Footer />
-            </div>
+            <>
+              <div className="pb-1 md:hidden">
+                <Footer />
+              </div>
+              <div className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 w-full px-4 max-w-[420px]">
+                <Footer dark={true} />
+              </div>
+            </>
           )}
         </motion.section>
       ))}

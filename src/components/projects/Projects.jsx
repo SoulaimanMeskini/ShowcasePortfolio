@@ -131,6 +131,11 @@ const Projects = ({ scrollRef }) => {
             pdfUrl={data.pdfUrl}
             centerText={data.centerText}
           />
+          {index === projectData.length - 1 && (
+            <div className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 w-full px-4 max-w-[420px]">
+              <Footer dark={true} />
+            </div>
+          )}
         </motion.section>
       ))}
       <div className="footer w-full md:hidden pb-32 pt-8">
